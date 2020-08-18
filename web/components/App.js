@@ -5,19 +5,19 @@ import TodoList from "./TodoList";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 
-const App = ({ loading, data, error }) => {
-    const { user, isAuthenticated } = useAuth0();
+const App = () => {
+  const { user, isAuthenticated } = useAuth0();
 
-    console.log(user);
+  console.log(user);
 
-    return (
-      <div>
-        <h1>Todo</h1>
-        <TodoList todos={data ? data.todos : []} />
-        {!isAuthenticated && <LoginButton />}
-        {isAuthenticated && <LogoutButton />}
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h1>Todo</h1>
+      <TodoList todos={[]} />
+      {!isAuthenticated && <LoginButton />}
+      {isAuthenticated && <LogoutButton />}
+    </div>
+  );
+}
 
 export default App;

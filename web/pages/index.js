@@ -1,19 +1,8 @@
-import gql from "graphql-tag";
 import { Auth0Provider } from "@auth0/auth0-react";
-import { Query } from "react-apollo";
 
 import withData from "../config";
 import App from '../components/App'
-
-const query = gql`
-  query {
-    todos {
-      id
-      name
-      completed
-    }
-  }
-`;
+import ApolloProviderWithAccessToken from "../components/ApolloProviderWithAccessToken";
 
 const Index = ({ authors }) => {
   return (
@@ -24,16 +13,9 @@ const Index = ({ authors }) => {
       redirectUri="http://localhost:3000/"
       audience="https://hasura-backend"
     >
-      <Query // <- Wrapping the main component with Query component from react-apollo
-        query={query}
-        fetchPolicy={"cache-and-network"}
-      >
-        {({ loading, data, error }) => {
-          return (
-            <App loading={loading} data={data} error={error} />
-          );
-        }}
-      </Query>
+      <ApolloProviderWithAccessToken>
+        <App />
+      </ApolloProviderWithAccessToken>
     </Auth0Provider>
   );
 };

@@ -1453,7 +1453,7 @@ anymatch@~3.1.1:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-apollo-boost@^0.4.4:
+apollo-boost@^0.4.9:
   version "0.4.9"
   resolved "https://packages.convoy.com:443/artifactory/api/npm/npm/apollo-boost/-/apollo-boost-0.4.9.tgz#ab3ba539c2ca944e6fd156583a1b1954b17a6791"
   integrity sha1-qzulOcLKlE5v0VZYOhsZVLF6Z5E=
