@@ -7,19 +7,21 @@ services:
       - '5432:5432'
     volumes:
       - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 'password'
   graphql-engine:
-    image: hasura/graphql-engine:v1.0.0
+    image: hasura/graphql-engine:latest
     ports:
-      - '4000:8080'
+      - '8080:8080'
     depends_on:
       - 'postgres'
     restart: always
     environment:
       EVENT_SECRET: 'local_secret'
       WEBHOOK_EVENT_ENDPOINT: '${DOMAIN}/hasura/event'
+      HASURA_GRAPHQL_SERVER_PORT: 8080
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
-      HASURA_GRAPHQL_DATABASE_URL: 'postgres://postgres:@postgres:5432/postgres'
-      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_DATABASE_URL: 'postgres://postgres:password@postgres:5432/postgres'
       HASURA_GRAPHQL_ADMIN_SECRET: 'admin-secret'
       HASURA_GRAPHQL_JWT_SECRET: '{ "type": "HS256", "key": "12345678901234567890123456789012" }'
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: 'anonymous'
