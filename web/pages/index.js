@@ -1,37 +1,40 @@
-import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
-import withData from '../config';
+import gql from "graphql-tag";
+import { Auth0Provider } from "@auth0/auth0-react";
+import { Query } from "react-apollo";
 
-import AuthorList from './AuthorList';
+import withData from "../config";
+import App from '../components/App'
 
 const query = gql`
-	query {
-	  author {
-	    id
-	    name
-	  }
-	}
-`
+  query {
+    todos {
+      id
+      name
+      completed
+    }
+  }
+`;
 
-const Index = ({ authors } ) => {
+const Index = ({ authors }) => {
   return (
-    <Query    // <- Wrapping the main component with Query component from react-apollo
-      query={ query }
-      fetchPolicy={ 'cache-and-network' }
+    <Auth0Provider
+      domain="herokunextjsauth0.auth0.com"
+      clientId="iqy45FZQ9Btr0f1J7qhd1ST23fjrIcD2"
+      // TODO[localhost]
+      redirectUri="http://localhost:3000/"
     >
-      {({ loading, data, error }) => {
-        if(error) {
-          return (<div>Error..</div>);
-        }
-        return (
-          <div>
-            <h1>My Authors </h1>
-            <AuthorList authors={data ? data.author: []} />
-          </div>
-        );
-      }}
-    </Query>
+      <Query // <- Wrapping the main component with Query component from react-apollo
+        query={query}
+        fetchPolicy={"cache-and-network"}
+      >
+        {({ loading, data, error }) => {
+          return (
+            <App loading={loading} data={data} error={error} />
+          );
+        }}
+      </Query>
+    </Auth0Provider>
   );
 };
 
-export default withData(Index)
+export default withData(Index);
