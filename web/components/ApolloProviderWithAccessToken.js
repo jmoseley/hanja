@@ -5,18 +5,22 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 
 const ApolloProviderWithAccessToken = props => {
-    const { getAccessTokenSilently } = useAuth0();
+    const { getAccessTokenSilently, isAuthenticated } = useAuth0();
 
     const [accessToken, setAccessToken] = useState('');
 
     useEffect(() => {
-        getAccessTokenSilently().then(at => {
-            console.log('at', at);
-            if (at) {
-                setAccessToken(at);
-            }
-        });
-    }, [accessToken]);
+        if (isAuthenticated) {
+            getAccessTokenSilently({
+                audience: 'https://hasura.demo.com/v1/graphql'
+            }).then(at => {
+                console.log('at', at);
+                if (at) {
+                    setAccessToken(at);
+                }
+            }).catch(err => console.error(err));
+        }
+    }, [isAuthenticated]);
 
     console.log('accessToken', accessToken);
 

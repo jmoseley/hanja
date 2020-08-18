@@ -11,7 +11,7 @@ const Index = ({ authors }) => {
       clientId="iqy45FZQ9Btr0f1J7qhd1ST23fjrIcD2"
       // TODO[localhost]
       redirectUri="http://localhost:3000/"
-      audience="https://hasura-backend"
+      audience='https://hasura.demo.com/v1/graphql'
     >
       <ApolloProviderWithAccessToken>
         <App />

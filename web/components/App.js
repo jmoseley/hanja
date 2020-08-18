@@ -13,9 +13,11 @@ const App = () => {
   return (
     <div>
       <h1>Todo</h1>
-      <TodoList todos={[]} />
       {!isAuthenticated && <LoginButton />}
-      {isAuthenticated && <LogoutButton />}
+      {isAuthenticated && (<div>
+        <TodoList todos={[]} />
+        <LogoutButton />
+      </div>)}
     </div>
   );
 }
