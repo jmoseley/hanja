@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useState, FunctionComponent } from "react";
 
-const NewTodo = (props) => {
+export interface Props {
+  onSubmit: (name: string) => Promise<void>
+}
+
+const NewTodo: FunctionComponent<Props> = (props) => {
   const [name, setName] = useState("");
 
   const handleSubmit = (evt) => {

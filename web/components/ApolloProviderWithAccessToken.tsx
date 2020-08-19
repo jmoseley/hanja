@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FunctionComponent } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { getApolloClient } from "../util/apolloClient";
 
-const ApolloProviderWithAccessToken = (props) => {
+const ApolloProviderWithAccessToken: FunctionComponent<{}> = (props) => {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
 
   const [accessToken, setAccessToken] = useState("");
@@ -14,7 +14,6 @@ const ApolloProviderWithAccessToken = (props) => {
         audience: "https://hasura.demo.com/v1/graphql",
       })
         .then((at) => {
-          console.log("at", at);
           if (at) {
             setAccessToken(at);
           }
@@ -22,8 +21,6 @@ const ApolloProviderWithAccessToken = (props) => {
         .catch((err) => console.error(err));
     }
   }, [isAuthenticated]);
-
-  console.log("accessToken", accessToken);
 
   const client = getApolloClient(accessToken);
 

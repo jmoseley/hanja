@@ -1,10 +1,10 @@
 import {
-  useQuery,
   gql,
   useMutation,
   useSubscription,
 } from "@apollo/react-hooks";
 import NewTodo from "./NewTodo";
+import { FunctionComponent } from "react";
 
 const TODO_SUB = gql`
   subscription fetchTodos {
@@ -39,12 +39,12 @@ const SET_COMPLETED = gql`
   }
 `;
 
-const TodoList = () => {
+const TodoList: FunctionComponent<{}> = () => {
   const { loading: todosLoading, error, data } = useSubscription(TODO_SUB);
-  const [saveTodo, { loading: createLoading }] = useMutation(
+  const [saveTodo] = useMutation(
     CREATE_TODO_MUTATION
   );
-  const [setCompleted, { loading: setCompletedLoading }] = useMutation(
+  const [setCompleted] = useMutation(
     SET_COMPLETED
   );
 
@@ -54,8 +54,6 @@ const TodoList = () => {
 
   return (
     <div>
-      {createLoading && <div>Saving...</div>}
-      {todosLoading && <div>Loading...</div>}
       {!todosLoading && error && <div>{error}</div>}
       {!todosLoading &&
         !error &&
@@ -69,16 +67,16 @@ const TodoList = () => {
             }}
           >
             {a.completed && (
-              <strike>
+              <del>
                 <h2>{a.name}</h2>
-              </strike>
+              </del>
             )}
             {!a.completed && <h2>{a.name}</h2>}
           </div>
         ))}
       <NewTodo
-        onSubmit={(name) => {
-          saveTodo({ variables: { name } });
+        onSubmit={async (name) => {
+          await saveTodo({ variables: { name } });
         }}
       />
     </div>

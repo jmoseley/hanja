@@ -5,7 +5,7 @@ import { HttpLink, ApolloClient, split } from "@apollo/react-hooks";
 import { Hermes } from "apollo-cache-hermes";
 import { SubscriptionClient } from "subscriptions-transport-ws";
 
-export function getApolloClient(accessToken) {
+export function getApolloClient(accessToken: string) {
   const headers = !!accessToken
     ? {
         Authorization: `Bearer ${accessToken}`,
@@ -30,7 +30,6 @@ export function getApolloClient(accessToken) {
   const splitLink = process.browser
     ? split(
         ({ query }) => {
-          console.log(query);
           const definition = getMainDefinition(query);
           const result =
             definition.kind === "OperationDefinition" &&
