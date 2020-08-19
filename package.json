@@ -3,5 +3,6 @@
   "version": "1.0.0",
   "description": "Mono-repo for hasura connected app",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts":{}
 }
