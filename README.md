@@ -11,7 +11,8 @@
   - [x] Use mutations to create add to list
   - [x] Use mutations to toggle completion of items
 - [x] Convert to typescript
-- [ ] Write tests
+- [x] Write tests
+- [ ] Linter/Formatting
 - [ ] Persist login session
 - [ ] Auto graphql query/types generation
 - [ ] Implement event/action backend that integrates with Hasura
