@@ -1,7 +1,7 @@
 {
-  "name": "nextjs-postgres-graphql",
+  "name": "hanja-web",
   "version": "1.0.0",
-  "description": "Boiler plate to get started with nextjs and postgres backed GraphQL server",
+  "description": "NextJS Front-end leveraging GraphQL and Hasura",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,13 +9,7 @@
     "build": "next build",
     "start": "next start"
   },
-  "keywords": [
-    "nextjs",
-    "graphql",
-    "postgres"
-  ],
   "author": "Jeremy Moseley",
-  "license": "MTI",
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
     "@auth0/auth0-react": "^1.0.0",

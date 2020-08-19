@@ -8,7 +8,7 @@ import { FunctionComponent } from "react";
 
 const TODO_SUB = gql`
   subscription fetchTodos {
-    todos {
+    todos(order_by: {completed: asc, created_at: asc}) {
       id
       name
       completed
