@@ -10,7 +10,8 @@
   - [x] Use subscriptions to load list
   - [x] Use mutations to create add to list
   - [x] Use mutations to toggle completion of items
-- [ ] Convert to typescript
+- [x] Convert to typescript
+- [ ] Persist login session
 - [ ] Auto graphql query/types generation
 - [ ] Implement event/action backend that integrates with Hasura
   - Some ideas that could leverage this:
