@@ -1,6 +1,5 @@
 import { Auth0Provider } from "@auth0/auth0-react";
 
-import withData from "../config";
 import App from "../components/App";
 import ApolloProviderWithAccessToken from "../components/ApolloProviderWithAccessToken";
 
@@ -20,4 +19,4 @@ const Index = ({ authors }) => {
   );
 };
 
-export default withData(Index);
+export default Index;
