@@ -3,7 +3,7 @@
 ## This is a work in progress
 
 - [x] Implement Todo app
-  - [x] Integrate front-end with Auth0  
+  - [x] Integrate front-end with Auth0
   - [x] Use Auth0 auth for Hasura interactions
   - [x] Use subscriptions to load list
   - [x] Use mutations to create add to list
@@ -11,7 +11,7 @@
 - [ ] Convert to typescript
 - [ ] Auto graphql query/types generation
 - [ ] Implement event/action backend that integrates with Hasura
-  - Some ideas that could leverage this: 
+  - Some ideas that could leverage this:
   - add emojis to item names
   - notifications
 - [ ] Write docs for getting started

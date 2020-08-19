@@ -14,12 +14,14 @@ const App = () => {
     <div>
       <h1>Todo</h1>
       {!isAuthenticated && <LoginButton />}
-      {isAuthenticated && (<div>
-        <TodoList todos={[]} />
-        <LogoutButton />
-      </div>)}
+      {isAuthenticated && (
+        <div>
+          <TodoList todos={[]} />
+          <LogoutButton />
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default App;

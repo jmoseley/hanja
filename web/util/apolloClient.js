@@ -1,11 +1,7 @@
 // import { split, HttpLink, ApolloClient } from "@apollo/client";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { WebSocketLink } from "@apollo/client/link/ws";
-import {
-  HttpLink,
-  ApolloClient,
-  split,
-} from "@apollo/react-hooks";
+import { HttpLink, ApolloClient, split } from "@apollo/react-hooks";
 import { Hermes } from "apollo-cache-hermes";
 import { SubscriptionClient } from "subscriptions-transport-ws";
 

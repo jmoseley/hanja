@@ -4,5 +4,8 @@
   "description": "Mono-repo for hasura connected app",
   "main": "index.js",
   "license": "MIT",
-  "scripts":{}
+  "scripts": {},
+  "devDependencies": {
+    "prettier": "^2.0.5"
+  }
 }
