@@ -18,8 +18,8 @@
     permission:
       columns:
       - completed
+      - id
       - name
-      - owner_id
       filter:
         owner_id:
           _eq: X-Hasura-User-Id
