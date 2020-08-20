@@ -1,0 +1,7 @@
+subscription fetchTodos {
+  todos(order_by: { completed: asc, created_at: asc }) {
+    id
+    name
+    completed
+  }
+}

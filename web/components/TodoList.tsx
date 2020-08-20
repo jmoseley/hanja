@@ -1,37 +1,10 @@
-import { gql, useMutation, useSubscription } from '@apollo/react-hooks';
+import { useMutation, useSubscription } from '@apollo/react-hooks';
 import React, { FunctionComponent } from 'react';
 
 import NewTodo from './NewTodo';
-
-const TODO_SUB = gql`
-  subscription fetchTodos {
-    todos(order_by: { completed: asc, created_at: asc }) {
-      id
-      name
-      completed
-    }
-  }
-`;
-
-const CREATE_TODO_MUTATION = gql`
-  mutation createTodo($name: String) {
-    insert_todos_one(object: { name: $name, completed: false }) {
-      id
-      name
-      completed
-    }
-  }
-`;
-
-const SET_COMPLETED = gql`
-  mutation setCompleted($id: uuid!, $completed: Boolean!) {
-    update_todos_by_pk(pk_columns: { id: $id }, _set: { completed: $completed }) {
-      name
-      completed
-      id
-    }
-  }
-`;
+import { SET_COMPLETED } from '../graphql/set_todo_completed_mutation';
+import { CREATE_TODO_MUTATION } from '../graphql/create_todo_mutation';
+import { TODO_SUB } from '../graphql/todo_subscription';
 
 const TodoList: FunctionComponent = () => {
   const { loading: todosLoading, error, data } = useSubscription(TODO_SUB);

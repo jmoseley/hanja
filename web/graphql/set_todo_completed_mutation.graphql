@@ -1,0 +1,7 @@
+mutation setCompleted($id: uuid!, $completed: Boolean!) {
+  update_todos_by_pk(pk_columns: { id: $id }, _set: { completed: $completed }) {
+    name
+    completed
+    id
+  }
+}
