@@ -1,7 +1,8 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
+import LoginButton from '../LoginButton';
 
 test('hello world', () => {
- const wrapper = mount(<p>Hello Jest!</p>);
- expect(wrapper.text()).toMatch('Hello Jest!');
+    const wrapper = shallow(<LoginButton />);
+    expect(wrapper.text()).toMatch('Log In');
 });
