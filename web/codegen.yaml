@@ -5,7 +5,7 @@ schema:
       headers:
         #TODO[admin auth]
         x-hasura-admin-secret: admin-secret
-documents: 'graphql/**/*.graphql'
+documents: 'graphql/**/*.*.graphql'
 config:
   scalars:
     timestamptz: Date
