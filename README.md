@@ -14,8 +14,9 @@
 - [x] Write unit tests
 - [x] Linter/Formatting
 - [ ] Persist login session
-- [ ] Auto graphql query/types generation
+- [x] Auto graphql query/types generation
 - [ ] Write integration tests
+- [ ] Tests in github action
 - [ ] Implement event/action backend that integrates with Hasura
   - Some ideas that could leverage this:
   - add emojis to item names
