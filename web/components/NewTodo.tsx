@@ -1,7 +1,7 @@
 import { useState, FunctionComponent } from "react";
 
 export interface Props {
-  onSubmit: (name: string) => Promise<void>
+  onSubmit: (name: string) => Promise<void>;
 }
 
 const NewTodo: FunctionComponent<Props> = (props) => {

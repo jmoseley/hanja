@@ -1,14 +1,10 @@
-import {
-  gql,
-  useMutation,
-  useSubscription,
-} from "@apollo/react-hooks";
+import { gql, useMutation, useSubscription } from "@apollo/react-hooks";
 import NewTodo from "./NewTodo";
 import { FunctionComponent } from "react";
 
 const TODO_SUB = gql`
   subscription fetchTodos {
-    todos(order_by: {completed: asc, created_at: asc}) {
+    todos(order_by: { completed: asc, created_at: asc }) {
       id
       name
       completed
@@ -41,12 +37,8 @@ const SET_COMPLETED = gql`
 
 const TodoList: FunctionComponent<{}> = () => {
   const { loading: todosLoading, error, data } = useSubscription(TODO_SUB);
-  const [saveTodo] = useMutation(
-    CREATE_TODO_MUTATION
-  );
-  const [setCompleted] = useMutation(
-    SET_COMPLETED
-  );
+  const [saveTodo] = useMutation(CREATE_TODO_MUTATION);
+  const [setCompleted] = useMutation(SET_COMPLETED);
 
   if (!todosLoading && error) {
     console.error(error);
