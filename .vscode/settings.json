@@ -2,5 +2,20 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
     },
+    "cSpell.words": [
+      "todos"
+    ],
+    "eslint.onIgnoredFiles": "warn",
+    "eslint.probe": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "html",
+      "vue",
+      "markdown",
+      "graphql"
+    ],
+    "editor.formatOnSave": true,
   }
   
