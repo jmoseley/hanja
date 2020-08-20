@@ -1,12 +1,12 @@
-import { useMutation, useSubscription } from '@apollo/react-hooks';
 import React, { FunctionComponent } from 'react';
 
 import NewTodo from './NewTodo';
+import { useFetchTodosSubscription, useCreateTodoMutation, useSetCompletedMutation } from '../generated/graphql';
 
 const TodoList: FunctionComponent = () => {
-  const { loading: todosLoading, error, data } = useSubscription(TODO_SUB);
-  const [saveTodo] = useMutation(CREATE_TODO_MUTATION);
-  const [setCompleted] = useMutation(SET_COMPLETED);
+  const { loading: todosLoading, error, data } = useFetchTodosSubscription();
+  const [saveTodo] = useCreateTodoMutation();
+  const [setCompleted] = useSetCompletedMutation();
 
   if (!todosLoading && error) {
     console.error(error);

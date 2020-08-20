@@ -1308,7 +1308,7 @@
     "@graphql-codegen/visitor-plugin-common" "^1.17.13"
     tslib "~2.0.0"
 
-"@graphql-codegen/plugin-helpers@^1.17.0", "@graphql-codegen/plugin-helpers@^1.17.8":
+"@graphql-codegen/plugin-helpers@^1.17.8":
   version "1.17.8"
   resolved "https://packages.convoy.com:443/artifactory/api/npm/npm/@graphql-codegen/plugin-helpers/-/plugin-helpers-1.17.8.tgz#d47e8bd6b425b38cfc4e2d670b31183b8e9a91e8"
   integrity sha1-1H6L1rQls4z8Ti1nCzEYO46akeg=
@@ -1358,7 +1358,7 @@
     auto-bind "~4.0.0"
     tslib "~2.0.0"
 
-"@graphql-codegen/visitor-plugin-common@^1.17.0", "@graphql-codegen/visitor-plugin-common@^1.17.13":
+"@graphql-codegen/visitor-plugin-common@^1.17.13":
   version "1.17.13"
   resolved "https://packages.convoy.com:443/artifactory/api/npm/npm/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-1.17.13.tgz#88dfd8b266aab140a36018807449a1162612e393"
   integrity sha1-iN/YsmaqsUCjYBiAdEmhFiYS45M=
@@ -4805,15 +4805,6 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   version "4.2.4"
   resolved "https://packages.convoy.com:443/artifactory/api/npm/npm/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
   integrity sha1-Ila94U02MpWMRl68ltxGfKB6Kfs=
-
-graphql-codegen-apollo-next-ssr@^0.0.14:
-  version "0.0.14"
-  resolved "https://packages.convoy.com:443/artifactory/api/npm/npm/graphql-codegen-apollo-next-ssr/-/graphql-codegen-apollo-next-ssr-0.0.14.tgz#5f3d446d9d8684a128cf900c13cdc66ebcd429ed"
-  integrity sha1-Xz1EbZ2GhKEoz5AME83GbrzUKe0=
-  dependencies:
-    "@graphql-codegen/plugin-helpers" "^1.17.0"
-    "@graphql-codegen/visitor-plugin-common" "^1.17.0"
-    auto-bind "~4.0.0"
 
 graphql-config@^3.0.2:
   version "3.0.3"
