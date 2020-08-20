@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import React, { FunctionComponent } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 
-import TodoList from "./TodoList";
-import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
+import TodoList from './TodoList';
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
 
-const App: FunctionComponent<{}> = () => {
-  const { user, isAuthenticated } = useAuth0();
+const App: FunctionComponent = () => {
+  const { isAuthenticated } = useAuth0();
 
   return (
     <div>

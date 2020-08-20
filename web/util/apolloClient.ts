@@ -1,9 +1,9 @@
 // import { split, HttpLink, ApolloClient } from "@apollo/client";
-import { getMainDefinition } from "@apollo/client/utilities";
-import { WebSocketLink } from "@apollo/client/link/ws";
-import { HttpLink, ApolloClient, split } from "@apollo/react-hooks";
-import { Hermes } from "apollo-cache-hermes";
-import { SubscriptionClient } from "subscriptions-transport-ws";
+import { getMainDefinition } from '@apollo/client/utilities';
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { HttpLink, ApolloClient, split } from '@apollo/react-hooks';
+import { Hermes } from 'apollo-cache-hermes';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 export function getApolloClient(accessToken: string) {
   const headers = !!accessToken
@@ -13,7 +13,7 @@ export function getApolloClient(accessToken: string) {
     : undefined;
 
   const httpLink = new HttpLink({
-    uri: "http://localhost:8080/v1/graphql",
+    uri: 'http://localhost:8080/v1/graphql',
     headers,
   });
 
@@ -22,7 +22,7 @@ export function getApolloClient(accessToken: string) {
     ? new WebSocketLink(
         new SubscriptionClient(`ws://localhost:8080/v1/graphql`, {
           connectionParams: { headers },
-        })
+        }),
       )
     : null;
 
@@ -31,16 +31,14 @@ export function getApolloClient(accessToken: string) {
     ? split(
         ({ query }) => {
           const definition = getMainDefinition(query);
-          const result =
-            definition.kind === "OperationDefinition" &&
-            definition.operation === "subscription";
+          const result = definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
 
           console.log(result);
 
           return result;
         },
         wsLink,
-        httpLink
+        httpLink,
       )
     : httpLink;
 

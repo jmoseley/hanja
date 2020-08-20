@@ -12,7 +12,7 @@
   - [x] Use mutations to toggle completion of items
 - [x] Convert to typescript
 - [x] Write unit tests
-- [ ] Linter/Formatting
+- [x] Linter/Formatting
 - [ ] Persist login session
 - [ ] Auto graphql query/types generation
 - [ ] Write integration tests

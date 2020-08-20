@@ -1,16 +1,16 @@
-import { useState, FunctionComponent } from "react";
+import React, { useState, FunctionComponent } from 'react';
 
 export interface Props {
   onSubmit: (name: string) => Promise<void>;
 }
 
 const NewTodo: FunctionComponent<Props> = (props) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (name !== "") {
-      setName("");
+    if (name !== '') {
+      setName('');
       props.onSubmit(name);
     }
   };
@@ -20,11 +20,7 @@ const NewTodo: FunctionComponent<Props> = (props) => {
       <form onSubmit={handleSubmit}>
         <label>
           New:
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
         </label>
         <input type="submit" value="Submit" />
       </form>

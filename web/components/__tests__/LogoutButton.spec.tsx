@@ -1,8 +1,8 @@
-import React from "react";
-import { shallow } from "enzyme";
-import LogoutButton from "../LogoutButton";
+import React from 'react';
+import { shallow } from 'enzyme';
+import LogoutButton from '../LogoutButton';
 
-test("hello world", () => {
+test('hello world', () => {
   const wrapper = shallow(<LogoutButton />);
-  expect(wrapper.text()).toMatch("Log Out");
+  expect(wrapper.text()).toMatch('Log Out');
 });

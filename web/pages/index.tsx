@@ -1,9 +1,10 @@
-import { Auth0Provider } from "@auth0/auth0-react";
+import { Auth0Provider } from '@auth0/auth0-react';
+import React, { FunctionComponent } from 'react';
 
-import App from "../components/App";
-import ApolloProviderWithAccessToken from "../components/ApolloProviderWithAccessToken";
+import App from '../components/App';
+import ApolloProviderWithAccessToken from '../components/ApolloProviderWithAccessToken';
 
-const Index = ({ authors }) => {
+const Index: FunctionComponent = () => {
   return (
     <Auth0Provider
       domain="herokunextjsauth0.auth0.com"
