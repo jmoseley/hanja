@@ -11,10 +11,11 @@
   - [x] Use mutations to create add to list
   - [x] Use mutations to toggle completion of items
 - [x] Convert to typescript
-- [x] Write tests
+- [x] Write unit tests
 - [ ] Linter/Formatting
 - [ ] Persist login session
 - [ ] Auto graphql query/types generation
+- [ ] Write integration tests
 - [ ] Implement event/action backend that integrates with Hasura
   - Some ideas that could leverage this:
   - add emojis to item names
