@@ -13,10 +13,19 @@ config:
     uuid: string
     bigint: number
     float8: number
+    json: 'Json'
   skipTypename: true
 generates:
   generated/graphql.tsx:
     plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - add:
+          content: >
+            interface Json {
+                [x: string]: string|number|boolean|Date|Json|JsonArray;
+            }
+            interface JsonArray extends Array<string|number|boolean|Date|Json|JsonArray> { }
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'

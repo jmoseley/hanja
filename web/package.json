@@ -11,7 +11,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "generate": "gql-gen --config codegen.yaml && cd .. && yarn eslint --fix web/generated/**/*.ts?"
+    "generate": "gql-gen --config codegen.yaml"
   },
   "author": "Jeremy Moseley",
   "dependencies": {
