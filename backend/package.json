@@ -1,0 +1,15 @@
+{
+  "name": "actions",
+  "private": true,
+  "description": "Backend to handle actions and events",
+  "devDependencies": {
+    "@types/node": "^14.6.0",
+    "@types/node-fetch": "^2.5.7",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "@vercel/node": "^1.8.0",
+    "node-emoji": "^1.10.0",
+    "node-fetch": "^2.6.0"
+  }
+}
