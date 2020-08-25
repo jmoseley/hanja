@@ -38,6 +38,11 @@
   resolved "https://packages.convoy.com:443/artifactory/api/npm/npm/@types/json-schema/-/json-schema-7.0.5.tgz#dcce4430e64b443ba8945f0290fb564ad5bac6dd"
   integrity sha1-3M5EMOZLRDuolF8CkPtWStW6xt0=
 
+"@types/node-emoji@^1.8.1":
+  version "1.8.1"
+  resolved "https://packages.convoy.com:443/artifactory/api/npm/npm/@types/node-emoji/-/node-emoji-1.8.1.tgz#689cb74fdf6e84309bcafce93a135dfecd01de3f"
+  integrity sha1-aJy3T99uhDCbyvzpOhNd/s0B3j8=
+
 "@typescript-eslint/eslint-plugin@^3.9.1":
   version "3.9.1"
   resolved "https://packages.convoy.com:443/artifactory/api/npm/npm/@typescript-eslint/eslint-plugin/-/eslint-plugin-3.9.1.tgz#8cf27b6227d12d66dd8dc1f1a4b04d1daad51c2e"
@@ -1058,6 +1063,11 @@ type-fest@^0.8.1:
   version "0.8.1"
   resolved "https://packages.convoy.com:443/artifactory/api/npm/npm/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha1-CeJJ696FHTseSNJ8EFREZn8XuD0=
+
+typescript@^3.9.7:
+  version "3.9.7"
+  resolved "https://packages.convoy.com:443/artifactory/api/npm/npm/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
+  integrity sha1-mNYApevcOPQMsndSLxLcgA6eJfo=
 
 uri-js@^4.2.2:
   version "4.2.2"
