@@ -1,0 +1,9 @@
+type Mutation {
+  insert_new_todo(name: String): insert_new_todo_output
+}
+
+type insert_new_todo_output {
+  completed: Boolean!
+  id: uuid!
+  name: String!
+}
