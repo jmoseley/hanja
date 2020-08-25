@@ -2,7 +2,7 @@ import { NowRequest, NowResponse } from '@vercel/node';
 import fetch from 'node-fetch';
 import * as emoji from 'node-emoji';
 
-import { MutationInsert_New_TodoArgs } from './hasuraCustomTypes';
+import { MutationInsert_New_TodoArgs } from '../hasuraCustomTypes';
 
 const HASURA_OPERATION = `mutation insertNewTodo($name: String) {
   insert_todos_one(object: { name: $name }) {
@@ -12,13 +12,8 @@ const HASURA_OPERATION = `mutation insertNewTodo($name: String) {
   }
 }`;
 
-interface Headers {
-  [key: string]: string | string[];
-}
-
 // execute the parent operation in Hasura
 const execute = async (variables: { name: string }, headers: NowRequest['headers']) => {
-  console.log('using headers', headers);
   const fetchResponse = await fetch('http://localhost:8080/v1/graphql', {
     method: 'POST',
     headers: headers as { [key: string]: string },

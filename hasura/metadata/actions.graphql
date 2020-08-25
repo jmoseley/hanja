@@ -1,9 +1,30 @@
 type Mutation {
-  insert_new_todo(name: String): insert_new_todo_output
+  insert_new_todo (
+    name: String
+  ): insert_new_todo_output
+}
+
+
+
+
+input SampleInput {
+  username : String!
+  password : String!
+}
+
+type InsertNewTodoOutput {
+  completed : Boolean!
+  id : uuid!
+  name : String!
 }
 
 type insert_new_todo_output {
-  completed: Boolean!
-  id: uuid!
-  name: String!
+  completed : Boolean!
+  id : uuid!
+  name : String!
 }
+
+type SampleOutput {
+  accessToken : String!
+}
+
