@@ -2,7 +2,11 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "cSpell.words": ["todos"],
+  "cSpell.words": [
+    "hasura",
+    "todos",
+    "vercel"
+  ],
   "eslint.onIgnoredFiles": "warn",
   "eslint.probe": [
     "javascript",
@@ -14,5 +18,6 @@
     "markdown",
     "graphql"
   ],
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2
 }

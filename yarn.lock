@@ -1059,11 +1059,6 @@ type-fest@^0.8.1:
   resolved "https://packages.convoy.com:443/artifactory/api/npm/npm/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha1-CeJJ696FHTseSNJ8EFREZn8XuD0=
 
-typescript@^3.9.7:
-  version "3.9.7"
-  resolved "https://packages.convoy.com:443/artifactory/api/npm/npm/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
-  integrity sha1-mNYApevcOPQMsndSLxLcgA6eJfo=
-
 uri-js@^4.2.2:
   version "4.2.2"
   resolved "https://packages.convoy.com:443/artifactory/api/npm/npm/uri-js/-/uri-js-4.2.2.tgz#94c540e1ff772956e2299507c010aea6c8838eb0"

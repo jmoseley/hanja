@@ -1,5 +1,6 @@
 {
   "name": "hanja-web",
+  "private": true,
   "version": "1.0.0",
   "description": "NextJS Front-end leveraging GraphQL and Hasura",
   "main": "index.js",
