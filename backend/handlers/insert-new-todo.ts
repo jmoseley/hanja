@@ -1,5 +1,6 @@
 import { NowRequest, NowResponse } from '@vercel/node';
 import fetch from 'node-fetch';
+import * as emoji from 'node-emoji';
 
 import { MutationInsert_New_TodoArgs } from './hasuraCustomTypes';
 
@@ -27,14 +28,16 @@ const execute = async (variables: { name: string }, headers: NowRequest['headers
     }),
   });
   const result = await fetchResponse.json();
-  console.log('DEBUG: ', JSON.stringify(result));
+  console.debug('DEBUG: ', JSON.stringify(result));
   return result;
 };
 
 // Request Handler
 const insertNewTodoHandler = async (req: NowRequest, res: NowResponse) => {
   // get request input
-  const { name }: MutationInsert_New_TodoArgs = req.body.input;
+  let { name }: MutationInsert_New_TodoArgs = req.body.input;
+
+  name = emoji.emojify(name);
 
   const { data, errors } = await execute(
     { name },
