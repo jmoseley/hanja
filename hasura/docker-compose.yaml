@@ -19,9 +19,9 @@ services:
     environment:
       #TODO[localhost]
       EVENT_SECRET: 'local_secret'
-      EVENT_ENDPOINT: 'http://host.docker.internal:3001/api/events'
+      EVENT_ENDPOINT: 'http://host.docker.internal:3000/api/events'
       #TODO[localhost]
-      ACTION_ENDPOINT: 'http://host.docker.internal:3001/api/actions'
+      ACTION_ENDPOINT: 'http://host.docker.internal:3000/api/actions'
       HASURA_GRAPHQL_SERVER_PORT: 8080
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
       #TODO[localhost]
