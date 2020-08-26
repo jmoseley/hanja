@@ -17,9 +17,6 @@
 - [x] Auto graphql query/types generation
 - [ ] Tests in github action
 - [x] Implement action backend that integrates with Hasura
-  - Some ideas that could leverage this:
-  - add emojis to item names
-  - notifications
 - [ ] Write docs for getting started
 - [ ] Provide guide or helper for building Auth0 application
 - [ ] Provide docs or helper for deploying
