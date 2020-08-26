@@ -1,0 +1,7 @@
+mutation insertNewTodo($name: String) {
+  insert_todos_one(object: { name: $name }) {
+    id
+    name
+    completed
+  }
+}

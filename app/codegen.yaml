@@ -5,7 +5,6 @@ schema:
       headers:
         #TODO[admin auth]
         x-hasura-admin-secret: admin-secret
-documents: 'graphql/**/*.*.graphql'
 config:
   scalars:
     timestamptz: Date
@@ -17,6 +16,7 @@ config:
   skipTypename: true
 generates:
   generated/graphql.tsx:
+    documents: 'graphql/**/*.*.graphql'
     plugins:
       - add:
           content: '/* eslint-disable */'
@@ -36,3 +36,17 @@ generates:
       withComponent: false
       exportFragmentSpreadSubTypes: true
       documentMode: graphQLTag
+  api/generated/graphql.ts:
+    documents: 'api/graphql/**/*.*.graphql'
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - add:
+          content: >
+            interface Json {
+                [x: string]: string|number|boolean|Date|Json|JsonArray;
+            }
+            interface JsonArray extends Array<string|number|boolean|Date|Json|JsonArray> { }
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-graphql-request'
