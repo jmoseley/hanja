@@ -17,6 +17,7 @@
 - [x] Auto graphql query/types generation
 - [ ] Tests in github action
 - [x] Implement action backend that integrates with Hasura
+- [x] Implement event backend
 - [ ] Write docs for getting started
 - [ ] Provide guide or helper for building Auth0 application
 - [ ] Provide docs or helper for deploying

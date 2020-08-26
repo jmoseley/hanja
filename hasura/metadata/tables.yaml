@@ -43,6 +43,28 @@
       filter:
         owner_id:
           _eq: X-Hasura-User-Id
+  event_triggers:
+  - name: todo_completed
+    definition:
+      enable_manual: false
+      update:
+        columns:
+        - completed
+    retry_conf:
+      num_retries: 0
+      interval_sec: 10
+      timeout_sec: 60
+    webhook_from_env: EVENT_ENDPOINT
+  - name: todo_created
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      num_retries: 1
+      interval_sec: 10
+      timeout_sec: 60
+    webhook_from_env: EVENT_ENDPOINT
 - table:
     schema: public
     name: users

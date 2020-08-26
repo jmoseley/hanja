@@ -8,8 +8,8 @@ import { SubscriptionClient } from 'subscriptions-transport-ws';
 export function getApolloClient(accessToken: string) {
   const headers = !!accessToken
     ? {
-        Authorization: `Bearer ${accessToken}`,
-      }
+      Authorization: `Bearer ${accessToken}`,
+    }
     : undefined;
 
   const httpLink = new HttpLink({
@@ -20,26 +20,24 @@ export function getApolloClient(accessToken: string) {
   // No websockets on the serverside.
   const wsLink = process.browser
     ? new WebSocketLink(
-        new SubscriptionClient(`ws://localhost:8080/v1/graphql`, {
-          connectionParams: { headers },
-        }),
-      )
+      new SubscriptionClient(`ws://localhost:8080/v1/graphql`, {
+        connectionParams: { headers },
+      }),
+    )
     : null;
 
   // No websockets on the server side, so only split in the browser.
   const splitLink = process.browser
     ? split(
-        ({ query }) => {
-          const definition = getMainDefinition(query);
-          const result = definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
+      ({ query }) => {
+        const definition = getMainDefinition(query);
+        const result = definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
 
-          console.log(result);
-
-          return result;
-        },
-        wsLink,
-        httpLink,
-      )
+        return result;
+      },
+      wsLink,
+      httpLink,
+    )
     : httpLink;
 
   return new ApolloClient({

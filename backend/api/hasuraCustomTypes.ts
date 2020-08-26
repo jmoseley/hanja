@@ -31,3 +31,40 @@ export type Mutation = {
 export type MutationInsert_New_TodoArgs = {
   name?: Maybe<Scalars['String']>;
 };
+
+export interface EventPayload<TTable> {
+  event: {
+    session_variables: { [key: string]: string };
+  } & (
+    | {
+      op: 'INSERT' | 'MANUAL';
+      data: {
+        old: null;
+        new: TTable;
+      };
+    }
+    | {
+      op: 'UPDATE';
+      data: {
+        old: TTable;
+        new: TTable;
+      };
+    }
+    | {
+      op: 'DELETE';
+      data: {
+        old: TTable;
+        new: null;
+      };
+    }
+  );
+  created_at: string;
+  id: string;
+  trigger: {
+    name: string;
+  };
+  table: {
+    schema: string;
+    name: string;
+  };
+}
