@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "script": "./send-new-users-to-backend.js",
+  "name": "send-new-users-to-backend",
+  "order": 4,
+  "stage": "login_success"
+}

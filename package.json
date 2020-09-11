@@ -6,7 +6,8 @@
   "main": "index.js",
   "license": "MITNFA",
   "scripts": {
-    "lint": "eslint '*/**/*.{js,ts,tsx,md,json}' --quiet --fix"
+    "lint": "eslint '*/**/*.{js,ts,tsx,md,json}' --quiet --fix",
+    "deploy-auth0": "cd auth0 && yarn deploy"
   },
   "devDependencies": {
     "@types/node-emoji": "^1.8.1",

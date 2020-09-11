@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "script": "./hasura-claims.js",
+  "name": "hasura-claims",
+  "order": 3,
+  "stage": "login_success"
+}

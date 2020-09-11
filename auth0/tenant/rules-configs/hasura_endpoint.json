@@ -1,0 +1,4 @@
+{
+  "key": "HASURA_ENDPOINT",
+  "value": "##HASURA_ENDPOINT##"
+}

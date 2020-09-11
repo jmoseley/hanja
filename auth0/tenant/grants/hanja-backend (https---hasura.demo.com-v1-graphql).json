@@ -1,0 +1,5 @@
+{
+  "client_id": "hanja-backend",
+  "audience": "https://hasura.demo.com/v1/graphql",
+  "scope": []
+}
