@@ -9,6 +9,10 @@ fi
 yarn heroku login
 yarn heroku create $1 && true
 yarn heroku git:remote -a $1
+yarn heroku stack:set container
+
+read -p "Updating app, are you ready?"
+
 yarn heroku config:set EVENT_SECRET=$EVENT_SECRET
 yarn heroku config:set EVENT_ENDPOINT=$APP_URL/api/events
 yarn heroku config:set ACTION_ENDPOINT=$APP_URL/api/actions
@@ -20,4 +24,4 @@ yarn heroku config:set HASURA_GRAPHQL_UNAUTHORIZED_ROLE=anonymous
 
 cd ..
 
-git subtree push --prefix ./hasura heroku master
+git subtree push --prefix hasura heroku master
