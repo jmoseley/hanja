@@ -7,7 +7,7 @@
   "license": "MITNFA",
   "scripts": {
     "lint": "eslint '*/**/*.{js,ts,tsx,md,json}' --quiet --fix",
-    "deploy-auth0": "cd auth0 && yarn deploy"
+    "deploy-auth0": "cd scripts && yarn deploy-auth0"
   },
   "devDependencies": {
     "@types/node-emoji": "^1.8.1",

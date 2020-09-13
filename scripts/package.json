@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "deploy": "yarn && ts-node deploy.ts"
+    "deploy-auth0": "yarn && ts-node deploy-auth0.ts"
   },
   "dependencies": {
     "auth0-deploy-cli": "^5.1.5"
