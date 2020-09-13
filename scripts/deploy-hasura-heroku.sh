@@ -1,12 +1,19 @@
 #!/bin/sh
-set -ex
+set -e
 
 if [ -z "$1" ]
   then
     echo "Usage: depoly-hasura-heroku.sh app-name"; exit 1;
 fi
 
-yarn heroku login
+set +e
+if yarn heroku whoami ; then
+  # Logged in
+  echo "Already logged in"
+else
+  yarn heroku login
+fi
+set -e
 yarn heroku create $1 && true
 yarn heroku git:remote -a $1
 yarn heroku stack:set container
