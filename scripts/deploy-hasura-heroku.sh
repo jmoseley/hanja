@@ -24,4 +24,4 @@ yarn heroku config:set HASURA_GRAPHQL_UNAUTHORIZED_ROLE=anonymous
 
 cd ..
 
-git subtree push --prefix hasura heroku master
+git push heroku master
