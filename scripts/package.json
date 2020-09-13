@@ -4,10 +4,12 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "deploy-auth0": "yarn && ts-node deploy-auth0.ts"
+    "deploy-auth0": "yarn && deploy-auth0.ts",
+    "deploy-hasura": "yarn && deploy-hasura-heroku.sh"
   },
   "dependencies": {
-    "auth0-deploy-cli": "^5.1.5"
+    "auth0-deploy-cli": "^5.1.5",
+    "heroku": "^7.42.13"
   },
   "devDependencies": {
     "ts-node": "^9.0.0",

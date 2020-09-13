@@ -24,6 +24,8 @@
   - [ ] Heroku
   - [ ] Render
   - [ ] Vercel
-  - [ ] Others?
+  - [ ] Digital Ocean
+  - [ ] AWS
+  - [ ] Hasura Cloud
 - [ ] Make the app look pretty
 - [ ] Leverage create-nextjs-app (or something similar, like yo) for helping people get started easily

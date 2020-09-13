@@ -39,6 +39,7 @@ export interface EventPayload<TTable> {
 
 // Request Handler
 const eventHandler = async (req: NowRequest, res: NowResponse) => {
+  // TODO: Validate secret
   const eventPayload: EventPayload<{ id: string; name: string; completed: boolean }> = req.body;
 
   console.info(`Received event: `, JSON.stringify(eventPayload));

@@ -5,6 +5,7 @@ import { getHasuraClient } from '../client';
 
 // Request Handler
 const insertNewTodoHandler = async (req: NowRequest, res: NowResponse) => {
+  // TODO: Validate secret
   console.log(req.body);
   // get request input
   let { name }: Mutation_RootInsert_New_TodoArgs = req.body.input;

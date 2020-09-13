@@ -1,3 +1,5 @@
+#!./node_modules/.bin/ts-node
+
 import { deploy } from 'auth0-deploy-cli';
 
 const config = {
