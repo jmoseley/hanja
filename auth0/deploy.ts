@@ -7,11 +7,23 @@ const config = {
   AUTH0_ALLOW_DELETE: false,
 };
 
-// TODO: Remove these defaults
-process.env.LOGO_URL = "https://jmoseley.github.io/hanja/assets/hanja_logo.png";
-process.env.APP_URL = "https://jmolseley.github.io/hanja";
-process.env.HASURA_ENDPOINT = "https://ngrok.io/blah";
-process.env.ADMIN_SECRET = "admin-secret";
+// TODO: Use cli tooling for variables and script input
+if (!process.env.LOGO_URL) {
+  console.error('Must provide a logo url as "LOGO_URL".');
+  process.exit(1);
+}
+if (!process.env.APP_URL) {
+  console.error('Must provide an application url as "APP_URL".');
+  process.exit(1);
+}
+if (!process.env.HASURA_ENDPOINT) {
+  console.error('Must provide Hasura endpoint as "HASURA_ENDPOINT".');
+  process.exit(1);
+}
+if (!process.env.ADMIN_SECRET) {
+  console.error('Must provide Hasura admin secret as "ADMIN_SECRET".');
+  process.exit(1);
+}
 
 // Import tenant config into Auth0 account
 deploy({
