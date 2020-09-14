@@ -1,7 +1,7 @@
 FROM hasura/graphql-engine:v1.3.2
 
 # Enable debugging mode. It should be disabled in production.
-ENV HASURA_GRAPHQL_DEV_MODE=false
+ENV HASURA_GRAPHQL_DEV_MODE=true
 
 # Heroku hobby tier PG has few limitations including 20 max connections
 # https://devcenter.heroku.com/articles/heroku-postgres-plans#hobby-tier
