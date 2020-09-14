@@ -8,8 +8,7 @@
     "deploy-hasura": "yarn && deploy-hasura-heroku.sh"
   },
   "dependencies": {
-    "auth0-deploy-cli": "^5.1.5",
-    "heroku": "^7.42.13"
+    "auth0-deploy-cli": "^5.1.5"
   },
   "devDependencies": {
     "ts-node": "^9.0.0",

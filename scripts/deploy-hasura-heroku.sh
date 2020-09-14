@@ -6,20 +6,25 @@ if [ -z "$1" ]
     echo "Usage: depoly-hasura-heroku.sh app-name"; exit 1;
 fi
 
+cd ..
+
+yarn
+
 set +e
 if yarn heroku whoami ; then
   # Logged in
-  echo "Already logged in"
+  echo "Already logged in to Heroku"
 else
   yarn heroku login
 fi
 set -e
-yarn heroku create $1 && true
+# TODO: Use manifest for app definition. Was not able to get this to work.
+yarn heroku apps:create -s container --addons=heroku-postgresql $1 && true
 yarn heroku git:remote -a $1
-yarn heroku stack:set container
 
 read -p "Updating app, are you ready?"
 
+# TODO: Use .env
 yarn heroku config:set EVENT_SECRET=$EVENT_SECRET
 yarn heroku config:set EVENT_ENDPOINT=$APP_URL/api/events
 yarn heroku config:set ACTION_ENDPOINT=$APP_URL/api/actions
@@ -29,6 +34,4 @@ yarn heroku config:set HASURA_GRAPHQL_ADMIN_SECRET=$ADMIN_SECRET
 yarn heroku config:set HASURA_GRAPHQL_JWT_SECRET='{"jwk_url": "'$AUTH0_URL'"/.well-known/jwks.json"}'
 yarn heroku config:set HASURA_GRAPHQL_UNAUTHORIZED_ROLE=anonymous
 
-cd ..
-
-git push heroku master
+git push heroku $(git rev-parse --abbrev-ref HEAD):master
