@@ -8,7 +8,8 @@
   "scripts": {
     "lint": "eslint '*/**/*.{js,ts,tsx,md,json}' --quiet --fix",
     "deploy-auth0": "cd scripts && yarn deploy-auth0",
-    "deploy-hasura-heroku": "cd scripts && yarn deploy-hasura-heroku"
+    "deploy-hasura-heroku": "cd scripts && yarn deploy-hasura-heroku",
+    "deploy-app-vercel": "cd scripts && yarn deploy-app-vercel"
   },
   "devDependencies": {
     "@types/node-emoji": "^1.8.1",
@@ -19,8 +20,10 @@
     "eslint-plugin-markdown": "^1.0.2",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.6",
+    "hasura-cli": "^1.3.1",
     "heroku": "^7.42.13",
     "prettier": "^2.0.5",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "vercel": "^20.1.0"
   }
 }

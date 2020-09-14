@@ -19,13 +19,15 @@
 - [x] Implement action backend that integrates with Hasura
 - [x] Implement event backend
 - [ ] Write docs for getting started
+- [ ] Docs for dev workflow
 - [x] Provide guide or helper for building Auth0 application
 - [ ] Provide docs or helper for deploying
   - [x] Heroku
   - [ ] Render
-  - [ ] Vercel
+  - [x] Vercel
   - [ ] Digital Ocean
   - [ ] AWS
   - [ ] Hasura Cloud
+- [ ] Docs for deploying staging/testing environments
 - [ ] Make the app look pretty
 - [ ] Leverage create-nextjs-app (or something similar, like yo) for helping people get started easily

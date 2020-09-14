@@ -1,4 +1,4 @@
-#!./node_modules/.bin/ts-node
+#!/usr/bin/env ts-node
 
 import { deploy } from 'auth0-deploy-cli';
 
@@ -29,7 +29,7 @@ if (!process.env.ADMIN_SECRET) {
 
 // Import tenant config into Auth0 account
 deploy({
-  input_file: './tenant', // Input file for directory
+  input_file: '../auth0/tenant', // Input file for directory
   base_path: process.cwd(),
   config, // Option to sent in json as object
   env: true, // Allow env variable mappings from process.env
