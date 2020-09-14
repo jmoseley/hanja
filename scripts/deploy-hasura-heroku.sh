@@ -35,3 +35,11 @@ yarn heroku config:set HASURA_GRAPHQL_JWT_SECRET='{ "jwk_url": "'$AUTH0_URL'/.we
 yarn heroku config:set HASURA_GRAPHQL_UNAUTHORIZED_ROLE=anonymous
 
 git push heroku $(git rev-parse --abbrev-ref HEAD):master
+
+HASURA_ENDPOINT=$(yarn heroku apps:info | grep "Web URL" | cut -d":" -f2,3 | sed 's/^ *//g')
+
+cd hasura
+
+echo "Applying migrations"
+hasura migrate apply --endpoint $HASURA_ENDPOINT --admin-secret $ADMIN_SECRET
+hasura metadata apply --endpoint $HASURA_ENDPOINT --admin-secret $ADMIN_SECRET
