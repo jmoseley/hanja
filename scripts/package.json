@@ -4,8 +4,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "deploy-auth0": "yarn && deploy-auth0.ts",
-    "deploy-hasura": "yarn && deploy-hasura-heroku.sh"
+    "deploy-auth0": "yarn && ./deploy-auth0.ts",
+    "deploy-hasura-heroku": "yarn && ./deploy-hasura-heroku.sh"
   },
   "dependencies": {
     "auth0-deploy-cli": "^5.1.5"

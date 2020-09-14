@@ -7,7 +7,8 @@
   "license": "MITNFA",
   "scripts": {
     "lint": "eslint '*/**/*.{js,ts,tsx,md,json}' --quiet --fix",
-    "deploy-auth0": "cd scripts && yarn deploy-auth0"
+    "deploy-auth0": "cd scripts && yarn deploy-auth0",
+    "deploy-hasura-heroku": "cd scripts && yarn deploy-hasura-heroku"
   },
   "devDependencies": {
     "@types/node-emoji": "^1.8.1",

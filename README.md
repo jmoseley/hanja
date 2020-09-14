@@ -21,7 +21,7 @@
 - [ ] Write docs for getting started
 - [x] Provide guide or helper for building Auth0 application
 - [ ] Provide docs or helper for deploying
-  - [ ] Heroku
+  - [x] Heroku
   - [ ] Render
   - [ ] Vercel
   - [ ] Digital Ocean
