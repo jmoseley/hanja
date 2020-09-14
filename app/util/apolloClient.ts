@@ -1,4 +1,3 @@
-import { URL } from 'url';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { HttpLink, ApolloClient, split } from '@apollo/react-hooks';
@@ -13,7 +12,7 @@ export function getApolloClient(accessToken: string) {
     : undefined;
 
   const browserSide = !!process.browser;
-  const hasuraEndpoint = browserSide ? process.env.NEXT_PUBLIC_HASURA_ENDPOINT : process.env.HASURA_ENDPOINT
+  const hasuraEndpoint = browserSide ? process.env.NEXT_PUBLIC_HASURA_ENDPOINT : process.env.HASURA_ENDPOINT;
 
   const httpLink = new HttpLink({
     uri: hasuraEndpoint,
@@ -24,7 +23,7 @@ export function getApolloClient(accessToken: string) {
   // No websockets on the serverside.
   if (browserSide) {
     const endpointUrl = new URL(hasuraEndpoint);
-    const isSecure = endpointUrl.protocol === 'https';
+    const isSecure = endpointUrl.protocol === 'https:';
     endpointUrl.protocol = isSecure ? 'wss' : 'ws';
     const websocketEndpoint = endpointUrl.href;
 

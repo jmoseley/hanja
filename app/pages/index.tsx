@@ -3,13 +3,14 @@ import React, { FunctionComponent } from 'react';
 
 import App from '../components/App';
 import ApolloProviderWithAccessToken from '../components/ApolloProviderWithAccessToken';
+import { getAppUrl } from '../util/appUrl';
 
 const Index: FunctionComponent = () => {
   return (
     <Auth0Provider
       domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN}
-      clientId="iqy45FZQ9Btr0f1J7qhd1ST23fjrIcD2"
-      redirectUri={window.location.href}
+      clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID}
+      redirectUri={getAppUrl()}
       audience="https://hasura.demo.com/v1/graphql"
     >
       <ApolloProviderWithAccessToken>

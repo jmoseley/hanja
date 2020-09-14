@@ -14,7 +14,7 @@ const insertNewTodoHandler = async (req: NowRequest, res: NowResponse) => {
 
   const client = getHasuraClient(// TODO: Properly handle session/auth headers
     {
-      'x-hasura-admin-secret': 'admin-secret',
+      'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
       'x-hasura-role': 'user',
       'x-hasura-user-id': req.body.session_variables['x-hasura-user-id'],
     });
