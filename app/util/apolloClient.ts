@@ -1,4 +1,4 @@
-// import { split, HttpLink, ApolloClient } from "@apollo/client";
+import { URL } from 'url';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { HttpLink, ApolloClient, split } from '@apollo/react-hooks';
@@ -12,19 +12,28 @@ export function getApolloClient(accessToken: string) {
     }
     : undefined;
 
+  const browserSide = !!process.browser;
+  const hasuraEndpoint = browserSide ? process.env.NEXT_PUBLIC_HASURA_ENDPOINT : process.env.HASURA_ENDPOINT
+
   const httpLink = new HttpLink({
-    uri: 'http://localhost:8080/v1/graphql',
+    uri: hasuraEndpoint,
     headers,
   });
 
+  let wsLink: WebSocketLink | null = null;
   // No websockets on the serverside.
-  const wsLink = process.browser
-    ? new WebSocketLink(
-      new SubscriptionClient(`ws://localhost:8080/v1/graphql`, {
+  if (browserSide) {
+    const endpointUrl = new URL(hasuraEndpoint);
+    const isSecure = endpointUrl.protocol === 'https';
+    endpointUrl.protocol = isSecure ? 'wss' : 'ws';
+    const websocketEndpoint = endpointUrl.href;
+
+    wsLink = new WebSocketLink(
+      new SubscriptionClient(websocketEndpoint, {
         connectionParams: { headers },
       }),
     )
-    : null;
+  }
 
   // No websockets on the server side, so only split in the browser.
   const splitLink = process.browser

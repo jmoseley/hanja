@@ -1,10 +1,8 @@
 overwrite: true
-# TODO[localhost]
 schema:
-  - http://localhost:8080/v1/graphql:
+  - ${HASURA_ENDPOINT}:
       headers:
-        #TODO[admin auth]
-        x-hasura-admin-secret: admin-secret
+        x-hasura-admin-secret: ${ADMIN_SECRET}
 config:
   scalars:
     timestamptz: Date

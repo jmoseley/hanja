@@ -11,7 +11,7 @@
     "dev": "yarn generate && next",
     "build": "yarn generate && next build",
     "start": "next start",
-    "generate": "gql-gen --config codegen.yaml"
+    "generate": "env && gql-gen --config codegen.yaml"
   },
   "author": "Jeremy Moseley",
   "dependencies": {

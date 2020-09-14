@@ -7,10 +7,9 @@ import ApolloProviderWithAccessToken from '../components/ApolloProviderWithAcces
 const Index: FunctionComponent = () => {
   return (
     <Auth0Provider
-      domain="herokunextjsauth0.auth0.com"
+      domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN}
       clientId="iqy45FZQ9Btr0f1J7qhd1ST23fjrIcD2"
-      // TODO[localhost]
-      redirectUri="http://localhost:3000/"
+      redirectUri={window.location.href}
       audience="https://hasura.demo.com/v1/graphql"
     >
       <ApolloProviderWithAccessToken>
