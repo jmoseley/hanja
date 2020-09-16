@@ -16,5 +16,5 @@ OPTS="--prod --local-config ./app/vercel.prod.json -b HASURA_ENDPOINT=$HASURA_EN
 if [ -d "app/.vercel" ]; then
   vercel $OPTS --confirm ./app
 else
-  vercel $OPTS ./app
+  vercel $OPTS --confirm --name $PROJECT_SLUG ./app
 fi

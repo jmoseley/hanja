@@ -1,11 +1,6 @@
 #!/bin/sh
 set -e
 
-if [ -z "$HEROKU_PROJECT_NAME" ]
-  then
-    echo "Must specify app name as HEROKU_PROJECT_NAME"; exit 1;
-fi
-
 cd ..
 
 yarn
@@ -19,8 +14,8 @@ else
 fi
 set -e
 # TODO: Use manifest for app definition. Was not able to get this to work.
-yarn heroku apps:create -s container --addons=heroku-postgresql $HEROKU_PROJECT_NAME && true
-yarn heroku git:remote -a $HEROKU_PROJECT_NAME
+yarn heroku apps:create -s container --addons=heroku-postgresql $PROJECT_SLUG && true
+yarn heroku git:remote -a $PROJECT_SLUG
 
 read -p "Updating app, are you ready?"
 

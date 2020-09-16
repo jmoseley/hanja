@@ -1,8 +1,10 @@
 {
-  "extends": "../tsconfig.json",
   "compilerOptions": {
     "noEmit": true,
-    "module": "commonjs"
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2019",
+    "esModuleInterop": true
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules"]
