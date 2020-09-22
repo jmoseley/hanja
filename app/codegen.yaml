@@ -2,7 +2,7 @@ overwrite: true
 schema:
   - ${HASURA_ENDPOINT}:
       headers:
-        x-hasura-admin-secret: ${ADMIN_SECRET}
+        x-hasura-admin-secret: ${HASURA_ADMIN_SECRET}
 config:
   scalars:
     timestamptz: Date

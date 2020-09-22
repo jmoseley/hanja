@@ -17,15 +17,12 @@ set -e
 yarn heroku apps:create -s container --addons=heroku-postgresql $PROJECT_SLUG && true
 yarn heroku git:remote -a $PROJECT_SLUG
 
-read -p "Updating app, are you ready?"
-
 # TODO: Use .env
 yarn heroku config:set EVENT_SECRET=$EVENT_SECRET
 yarn heroku config:set EVENT_ENDPOINT=$APP_URL/api/events
 yarn heroku config:set ACTION_ENDPOINT=$APP_URL/api/actions
 yarn heroku config:set ACTION_SECRET=$ACTION_SECRET
 yarn heroku config:set HASURA_GRAPHQL_ADMIN_SECRET=$ADMIN_SECRET
-#TODO[chicken before the egg]
 yarn heroku config:set HASURA_GRAPHQL_JWT_SECRET='{ "jwk_url": "'$AUTH0_URL'/.well-known/jwks.json" }'
 yarn heroku config:set HASURA_GRAPHQL_UNAUTHORIZED_ROLE=anonymous
 

@@ -29,5 +29,5 @@
   - [ ] AWS
   - [ ] Hasura Cloud
 - [ ] Docs for deploying staging/testing environments
-- [ ] Make the app look pretty
+- [ ] Make the demo app look pretty
 - [ ] Leverage create-nextjs-app (or something similar, like yo) for helping people get started easily
