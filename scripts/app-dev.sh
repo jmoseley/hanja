@@ -9,6 +9,8 @@ export AUTH0_DOMAIN=$(cat ../hanja-config.dev.json | jq -r '.auth0Domain')
 
 export NEXT_PUBLIC_APP_ROOT=$APP_ROOT
 export NEXT_PUBLIC_HASURA_ENDPOINT=$HASURA_ENDPOINT
+export NEXT_PUBLIC_HASURA_ENDPOINT=$HASURA_ENDPOINT
+export NEXT_PUBLIC_APP_ROOT=$APP_ROOT
 export NEXT_PUBLIC_AUTH0_DOMAIN=$AUTH0_DOMAIN
 export NEXT_PUBLIC_AUTH0_CLIENT_ID=$(cat ../hanja-config.dev.json | jq -r '.auth0WebClientId')
 

@@ -8,7 +8,10 @@
     "deploy-hasura-heroku": "./deploy-hasura-heroku.sh",
     "deploy-app-vercel": "./deploy-app-vercel.sh",
     "deploy": "./deploy.ts",
-    "hasura": "./hasura-helper.sh"
+    "hasura": "./hasura-helper.sh",
+    "hasura-local": "./hasura-local-helper.sh",
+    "hasura-dev": "./hasura-dev.sh",
+    "app-dev": "./app-dev.sh"
   },
   "dependencies": {
     "@supercharge/strings": "^1.12.0",

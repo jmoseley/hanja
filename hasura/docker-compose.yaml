@@ -17,19 +17,16 @@ services:
       - 'postgres'
     restart: always
     environment:
-      #TODO[localhost]
-      EVENT_SECRET: 'local_secret'
-      ACTION_SECRET: 'local_secret'
+      EVENT_SECRET: ${EVENT_SECRET}
+      ACTION_SECRET: ${ACTION_SECRET}
       EVENT_ENDPOINT: 'http://host.docker.internal:3000/api/events'
       #TODO[localhost]
       ACTION_ENDPOINT: 'http://host.docker.internal:3000/api/actions'
       HASURA_GRAPHQL_SERVER_PORT: 8080
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
-      #TODO[localhost]
       HASURA_GRAPHQL_DATABASE_URL: 'postgres://postgres:password@postgres:5432/postgres'
-      HASURA_GRAPHQL_ADMIN_SECRET: 'admin-secret'
-      #TODO[auth0 config]
-      HASURA_GRAPHQL_JWT_SECRET: '{"jwk_url": "https://hanja-demo.us.auth0.com/.well-known/jwks.json"}'
+      HASURA_GRAPHQL_ADMIN_SECRET: ${ADMIN_SECRET}
+      HASURA_GRAPHQL_JWT_SECRET: '{"jwk_url": "${AUTH0_URL}/.well-known/jwks.json"}'
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: 'anonymous'
 volumes:
   db_data:
