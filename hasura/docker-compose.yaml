@@ -19,6 +19,7 @@ services:
     environment:
       #TODO[localhost]
       EVENT_SECRET: 'local_secret'
+      ACTION_SECRET: 'local_secret'
       EVENT_ENDPOINT: 'http://host.docker.internal:3000/api/events'
       #TODO[localhost]
       ACTION_ENDPOINT: 'http://host.docker.internal:3000/api/actions'
