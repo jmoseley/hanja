@@ -1,7 +1,7 @@
 import { NowRequest, NowResponse } from '@vercel/node';
 import * as emoji from 'node-emoji';
 import { Mutation_RootInsert_New_TodoArgs } from '../generated/graphql';
-import { getHasuraClient } from '../client';
+import { getHasuraClient } from '../../api-lib/client';
 
 // Request Handler
 const insertNewTodoHandler = async (req: NowRequest, res: NowResponse) => {

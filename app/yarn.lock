@@ -7798,6 +7798,11 @@ react-apollo@^3.1.1:
     "@apollo/react-hooks" "^3.1.5"
     "@apollo/react-ssr" "^3.1.5"
 
+react-async-hook@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.npmjs.org/react-async-hook/-/react-async-hook-3.6.1.tgz#aed3e492d87319392865c83ed7cef3609e2a7fef"
+  integrity sha512-YWBB2feVQF79t5u2raMPHlZ8975Jds+guCvkWVC4kRLDlSCouLsYpQm4DGSqPeHvoHYVVcDfqNayLZAXQmnxnw==
+
 react-dom@^16.9.0:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-16.13.1.tgz#c1bd37331a0486c078ee54c4740720993b2e0e7f"

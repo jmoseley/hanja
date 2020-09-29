@@ -6,11 +6,12 @@ import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 
 const App: FunctionComponent = () => {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, error } = useAuth0();
 
   return (
     <div>
-      <h1>Todo</h1>
+      <h1>Hanja Todo App 📝</h1>
+      {error && <div>Login Error: {error.message}</div>}
       {!isAuthenticated && <LoginButton />}
       {isAuthenticated && (
         <div>

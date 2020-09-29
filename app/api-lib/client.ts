@@ -1,5 +1,5 @@
 import { GraphQLClient } from 'graphql-request';
-import { getSdk } from './generated/graphql';
+import { getSdk } from '../api/generated/graphql';
 
 const ENDPOINT = process.env.HASURA_ENDPOINT;
 
