@@ -35,7 +35,7 @@ generates:
       exportFragmentSpreadSubTypes: true
       documentMode: graphQLTag
   api/generated/graphql.ts:
-    documents: 'api/graphql/**/*.*.graphql'
+    documents: 'api-lib/graphql/**/*.*.graphql'
     plugins:
       - add:
           content: '/* eslint-disable */'
