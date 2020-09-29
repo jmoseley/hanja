@@ -4,7 +4,6 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "deploy-auth0": "yarn && ./deploy-auth0.ts",
     "deploy-hasura-heroku": "./deploy-hasura-heroku.sh",
     "deploy-app-vercel": "./deploy-app-vercel.sh",
     "deploy": "./deploy.ts",

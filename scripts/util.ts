@@ -55,7 +55,8 @@ export function randomStringFilter(value: string): string {
   return value;
 }
 
-export async function writeJsonFile(path: string, content: Record<string, unknown>): Promise<void> {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export async function writeJsonFile(path: string, content: object): Promise<void> {
   return await new Promise<void>((resolve, reject) => {
     fs.writeFile(path, JSON.stringify(content, null, 2), (err) => {
       if (err) {

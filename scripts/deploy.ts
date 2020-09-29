@@ -13,12 +13,16 @@ import tempfile from 'tempfile';
 import { randomStringFilter, executeCommand, writeJsonFile, spinOn, ExecError } from './util';
 
 interface Config {
+  appUrl: string,
   projectName: string,
   projectSlug: string,
+  hasuraEndpoint: string,
+  hasuraBaseUrl: string,
   herokuTeam: string,
   auth0Domain: string,
   auth0CliClientId: string,
   auth0CliClientSecret: string,
+  auth0WebClientId: string,
   logoUrl: string,
   adminSecret: string,
   eventSecret: string,
@@ -80,6 +84,12 @@ const main = async () => {
       default: `${appUrl}/logo.png`
     }], existingConfig);
 
+    const { domainName } = await inquirer.prompt({
+      name: 'domainName',
+      type: 'input',
+      message: 'Domain Name for web app (optional)',
+    }, existingConfig);
+
     const { herokuTeam } = await inquirer.prompt({
       name: 'herokuTeam',
       type: 'input',
@@ -122,6 +132,24 @@ const main = async () => {
     const hasuraBaseUrl = `https://${projectSlug}.herokuapp.com`;
     const hasuraEndpoint = `${hasuraBaseUrl}/v1/graphql`;
     const auth0Url = `https://${auth0Domain}`;
+
+    const updatedConfig: Config = {
+      ...existingConfig,
+      appUrl,
+      projectName,
+      projectSlug,
+      herokuTeam,
+      hasuraEndpoint,
+      hasuraBaseUrl,
+      auth0Domain,
+      auth0CliClientId,
+      auth0CliClientSecret,
+      logoUrl,
+      adminSecret,
+      eventSecret,
+      actionSecret,
+      domainName,
+    }
 
     if (shouldWriteConfig) {
       await spinOn(
@@ -220,18 +248,22 @@ const main = async () => {
       }
     );
 
+    updatedConfig.auth0WebClientId = auth0WebClientId;
+    if (shouldWriteConfig) {
+      await spinOn(
+        `Writing data to ${configFilePath}...`,
+        `Wrote config to ${configFilePath}. This file contains secrets, and should be kept somewhere safe. However, it should NOT be committed to your repo, put it somewhere else.`,
+        async () => {
+          await writeJsonFile(configFilePath, updatedConfig);
+        });
+    }
+
     const vercelConfigFile = tempfile('.json');
     await spinOn(
       `Writing vercel config...`,
       `Wrote vercel config to temp file.`,
       async () => {
-        await writeJsonFile(vercelConfigFile, buildVercelProdConfig({
-          hasuraEndpoint,
-          adminSecret,
-          appUrl,
-          auth0Domain,
-          auth0ClientId: auth0WebClientId
-        }));
+        await writeJsonFile(vercelConfigFile, buildVercelProdConfig(updatedConfig));
       }
     );
 
@@ -264,8 +296,8 @@ const main = async () => {
 
 main();
 
-function buildVercelProdConfig(config: { hasuraEndpoint: string, adminSecret: string, appUrl: string, auth0Domain: string, auth0ClientId: string }) {
-  return {
+function buildVercelProdConfig(config: Config) {
+  const vercelConfig = {
     "version": 2,
     "env": {
       "NEXT_PUBLIC_HASURA_ENDPOINT": config.hasuraEndpoint,
@@ -274,7 +306,7 @@ function buildVercelProdConfig(config: { hasuraEndpoint: string, adminSecret: st
       "APP_ROOT": config.appUrl,
       "NEXT_PUBLIC_APP_ROOT": config.appUrl,
       "NEXT_PUBLIC_AUTH0_DOMAIN": config.auth0Domain,
-      "NEXT_PUBLIC_AUTH0_CLIENT_ID": config.auth0ClientId,
+      "NEXT_PUBLIC_AUTH0_CLIENT_ID": config.auth0WebClientId,
     },
     "build": {
       "env": {
@@ -284,8 +316,12 @@ function buildVercelProdConfig(config: { hasuraEndpoint: string, adminSecret: st
         "APP_ROOT": config.appUrl,
         "NEXT_PUBLIC_APP_ROOT": config.appUrl,
         "NEXT_PUBLIC_AUTH0_DOMAIN": config.auth0Domain,
-        "NEXT_PUBLIC_AUTH0_CLIENT_ID": config.auth0ClientId,
+        "NEXT_PUBLIC_AUTH0_CLIENT_ID": config.auth0WebClientId,
       }
     }
   };
+
+
+
+  return vercelConfig;
 }
