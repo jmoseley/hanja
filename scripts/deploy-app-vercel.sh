@@ -15,7 +15,16 @@ else
   echo "Already logged in to Vercel"
 fi
 
-OPTS="--prod --local-config $VERCEL_CONFIG_FILE -b HASURA_ENDPOINT=$HASURA_ENDPOINT -b HASURA_ADMIN_SECRET=$HASURA_ADMIN_SECRET"
+LOCAL_OPTS="--local-config $VERCEL_CONFIG_FILE"
+OPTS="--prod $LOCAL_OPTS -b HASURA_ENDPOINT=$HASURA_ENDPOINT -b HASURA_ADMIN_SECRET=$HASURA_ADMIN_SECRET"
+
+if [ -n "$DOMAIN_NAME" ]; then
+  echo "Setting domain alias"
+  if [ -z "$(vercel domains ls $LOCAL_OPTS 2>&1 | grep $DOMAIN_NAME)" ]; then
+    echo "Domain not registered to account, adding"
+    vercel domains add $DOMAIN_NAME $PROJECT_SLUG $LOCAL_OPTS
+  fi
+fi
 
 # If .vercel folder does not exist, allow opportunity for project to be linked, otherwise just quick deploy
 if [ -d "app/.vercel" ]; then

@@ -11,6 +11,7 @@ import capcon from 'capture-console';
 import tempfile from 'tempfile';
 
 import { randomStringFilter, executeCommand, writeJsonFile, spinOn, ExecError } from './util';
+import { config } from 'shelljs';
 
 interface Config {
   appUrl: string,
@@ -27,6 +28,7 @@ interface Config {
   adminSecret: string,
   eventSecret: string,
   actionSecret: string,
+  domainName: string | null,
 }
 
 const main = async () => {
@@ -49,8 +51,6 @@ const main = async () => {
     const { projectName } = await inquirer.prompt({ type: 'input', name: 'projectName', message: 'Project Name', }, existingConfig);
     const { projectSlug } = await inquirer.prompt({ type: 'input', name: 'projectSlug', message: 'Project Slug', default: ldKebabCase(projectName) }, existingConfig);
 
-    const appUrl = `https://${projectSlug}.vercel.app`;
-
     if (!existingConfig.auth0CliClientId) {
       const { auth0Setup } = await inquirer.prompt({
         type: 'confirm',
@@ -63,6 +63,15 @@ const main = async () => {
         process.exit(1);
       }
     }
+
+    const { domainName } = await inquirer.prompt({
+      name: 'domainName',
+      type: 'input',
+      message: 'Domain Name for web app (optional)',
+      default: null,
+    }, existingConfig);
+
+    const appUrl = `https://${domainName || `${projectSlug}.vercel.app`}`;
 
     console.log(chalk.blue(`Please enter Auth0 data`));
     const { auth0Domain, auth0CliClientId, auth0CliClientSecret, logoUrl } = await inquirer.prompt([{
@@ -83,12 +92,6 @@ const main = async () => {
       message: 'Logo Url (to personalize the login screen)',
       default: `${appUrl}/logo.png`
     }], existingConfig);
-
-    const { domainName } = await inquirer.prompt({
-      name: 'domainName',
-      type: 'input',
-      message: 'Domain Name for web app (optional)',
-    }, existingConfig);
 
     const { herokuTeam } = await inquirer.prompt({
       name: 'herokuTeam',
@@ -170,6 +173,7 @@ const main = async () => {
             adminSecret,
             eventSecret,
             actionSecret,
+            domainName,
           });
         });
     }
@@ -269,13 +273,18 @@ const main = async () => {
 
     await spinOn(
       `Deploying Vercel app...`,
-      `Done deploying Vercel app`,
+      `Done deploying Vercel app. ${domainName
+        ? `The domain (${domainName}) has been set as an alias for the project.
+Please follow directions at https://vercel.com/jmoseley/${projectSlug}/settings/domains to ensure it is properly configured.`
+        : ''
+      }`,
       async () => {
         await executeCommand(`yarn deploy-app-vercel`, {
           VERCEL_CONFIG_FILE: vercelConfigFile,
           PROJECT_SLUG: projectSlug,
           HASURA_ENDPOINT: hasuraEndpoint,
           HASURA_ADMIN_SECRET: adminSecret,
+          DOMAIN_NAME: domainName,
         });
       }
     );
@@ -297,7 +306,7 @@ const main = async () => {
 main();
 
 function buildVercelProdConfig(config: Config) {
-  const vercelConfig = {
+  const vercelConfig: Record<string, unknown> = {
     "version": 2,
     "env": {
       "NEXT_PUBLIC_HASURA_ENDPOINT": config.hasuraEndpoint,
@@ -321,7 +330,9 @@ function buildVercelProdConfig(config: Config) {
     }
   };
 
-
+  if (config.domainName) {
+    vercelConfig.alias = [config.domainName];
+  }
 
   return vercelConfig;
 }
