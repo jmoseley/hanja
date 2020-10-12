@@ -7,11 +7,10 @@
   "license": "MITNFA",
   "scripts": {
     "lint": "eslint '*/**/*.{js,ts,tsx,md,json}' --quiet --fix",
-    "hasura": "cd scripts && yarn hasura",
+    "hasura-prod": "cd scripts && yarn hasura-prod",
     "hasura-local": "cd scripts && yarn hasura-local",
-    "hasura-dev": "cd scripts && yarn hasura-dev",
-    "app-dev": "cd scripts && yarn app-dev",
-    "deploy": "cd scripts && yarn deploy"
+    "deploy": "cd scripts && yarn deploy",
+    "dev": "cd scripts && yarn dev"
   },
   "devDependencies": {
     "@types/node-emoji": "^1.8.1",

@@ -22,7 +22,7 @@ const NewTodo: FunctionComponent<Props> = (props) => {
           New:
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit!" />
       </form>
     </div>
   );

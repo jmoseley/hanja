@@ -1,5 +1,7 @@
 #!/bin/sh
-set -ex
+set -e
+
+source includes.sh
 
 export HASURA_ADMIN_SECRET=$(cat ../hanja-config.dev.json | jq -r '.adminSecret')
 export HASURA_ENDPOINT=$(cat ../hanja-config.dev.json | jq -r '.hasuraEndpoint')
@@ -15,6 +17,8 @@ export NEXT_PUBLIC_AUTH0_DOMAIN=$AUTH0_DOMAIN
 export NEXT_PUBLIC_AUTH0_CLIENT_ID=$(cat ../hanja-config.dev.json | jq -r '.auth0WebClientId')
 
 cd ../app
+
+wait_for_heroku
 
 yarn generate-watch &
 

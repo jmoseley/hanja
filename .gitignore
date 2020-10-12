@@ -2,3 +2,4 @@ node_modules
 yarn-error.log
 .env
 hanja-config.*.json
+hasura/db_data
