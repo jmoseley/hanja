@@ -10,7 +10,8 @@
     "hasura-prod": "cd scripts && yarn hasura-prod",
     "hasura-local": "cd scripts && yarn hasura-local",
     "deploy": "cd scripts && yarn deploy",
-    "dev": "cd scripts && yarn dev"
+    "dev": "cd scripts && yarn dev",
+    "configure-dev": "cd scripts && yarn configure-dev"
   },
   "devDependencies": {
     "@types/node-emoji": "^1.8.1",

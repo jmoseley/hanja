@@ -8,9 +8,8 @@ import chalk from 'chalk';
 import { deploy } from 'auth0-deploy-cli';
 import { ManagementClient } from 'auth0';
 import capcon from 'capture-console';
-import tempfile from 'tempfile';
 
-import { randomStringFilter, executeCommand, writeJsonFile, spinOn, ExecError } from './util';
+import { randomStringFilter, writeJsonFile, spinOn, ExecError } from './util';
 
 interface Config {
   appUrl: string,
@@ -22,6 +21,7 @@ interface Config {
   auth0Domain: string,
   auth0CliClientId: string,
   auth0CliClientSecret: string,
+  auth0WebClientId: string,
   logoUrl: string,
   adminSecret: string,
   eventSecret: string,
@@ -32,7 +32,7 @@ interface Config {
 
 const main = async () => {
   try {
-    const configFilePath = path.join(process.cwd(), '../hanja-config.prod.json');
+    const configFilePath = path.join(process.cwd(), '../hanja-config.dev.json');
     let existingConfig: Config = {} as Config;
     if (fs.existsSync(configFilePath)) {
       existingConfig = JSON.parse(await new Promise<string>((resolve, reject) => {
@@ -54,7 +54,7 @@ const main = async () => {
       const { auth0Setup } = await inquirer.prompt({
         type: 'confirm',
         name: 'auth0Setup',
-        message: 'Have you set up your auth0 account (as describe in the Getting Started guide)?'
+        message: 'Have you set up your auth0 account (as describe in the Getting Started guide)? You should have a separate Auth0 Tenant for each developer and production.'
       });
 
       if (!auth0Setup) {
@@ -63,19 +63,10 @@ const main = async () => {
       }
     }
 
-    const { domainName, graphqlDomainName } = await inquirer.prompt([{
-      name: 'domainName',
-      type: 'input',
-      message: 'Domain Name for web app (optional)',
-      default: null,
-    }, {
-      name: 'graphqlDomainName',
-      type: 'input',
-      message: 'Domain Name for graphql api (optional)',
-      default: null,
-    }], existingConfig);
+    const appUrl = `http://localhost:3000`;
 
-    const appUrl = `https://${domainName || `${projectSlug}.vercel.app`}`;
+    // Auth0 requires the support URL to not be 'localhost', so use something else. TODO: Make this configurable.
+    const supportUrl = `https://jmoseley.github.io/hanja`
 
     console.log(chalk.blue(`Please enter Auth0 data`));
     const { auth0Domain, auth0CliClientId, auth0CliClientSecret, logoUrl } = await inquirer.prompt([{
@@ -94,14 +85,8 @@ const main = async () => {
     }, {
       name: 'logoUrl',
       message: 'Logo Url (to personalize the login screen)',
-      default: `${appUrl}/logo.png`
+      default: `${supportUrl}/logo.png`
     }], existingConfig);
-
-    const { herokuTeam } = await inquirer.prompt({
-      name: 'herokuTeam',
-      type: 'input',
-      message: 'Heroku Team Name (optional)',
-    }, existingConfig);
 
     console.log(chalk.blue(`Please enter Hasura secrets`));
     const { adminSecret, eventSecret, actionSecret } = await inquirer.prompt([{
@@ -136,7 +121,7 @@ const main = async () => {
       }
     }
 
-    const hasuraBaseUrl = `https://${graphqlDomainName ? graphqlDomainName : `${projectSlug}.herokuapp.com`}`;
+    const hasuraBaseUrl = `http://localhost:8080`;
     const hasuraEndpoint = `${hasuraBaseUrl}/v1/graphql`;
     const auth0Url = `https://${auth0Domain}`;
 
@@ -145,7 +130,6 @@ const main = async () => {
       appUrl,
       projectName,
       projectSlug,
-      herokuTeam,
       hasuraEndpoint,
       hasuraBaseUrl,
       auth0Domain,
@@ -155,8 +139,6 @@ const main = async () => {
       adminSecret,
       eventSecret,
       actionSecret,
-      domainName,
-      graphqlDomainName,
     }
 
     if (shouldWriteConfig) {
@@ -167,22 +149,6 @@ const main = async () => {
           await writeJsonFile(configFilePath, updatedConfig);
         });
     }
-
-    // TODO: Programmatic usage of the Heroku cli.
-    await spinOn(
-      `Deploying Hasura...`,
-      `Hasura deployed.`,
-      async () => await executeCommand(`yarn deploy-hasura-heroku`, {
-        PROJECT_SLUG: projectSlug,
-        HEROKU_TEAM: herokuTeam,
-        EVENT_SECRET: eventSecret,
-        APP_URL: appUrl,
-        ACTION_SECRET: actionSecret,
-        ADMIN_SECRET: adminSecret,
-        AUTH0_URL: auth0Url,
-        DOMAIN_NAME: graphqlDomainName || '',
-      })
-    );
 
     let auth0WebClientId: string | undefined = undefined;
     await spinOn(
@@ -206,7 +172,7 @@ const main = async () => {
                 HASURA_ENDPOINT: hasuraEndpoint,
                 ADMIN_SECRET: adminSecret,
                 PROJECT_NAME: projectName,
-                SUPPORT_URL: appUrl,
+                SUPPORT_URL: supportUrl,
               }
             }, // Option to sent in json as object
             env: false, // Disallow env variable mappings from process.env
@@ -244,32 +210,17 @@ const main = async () => {
       }
     );
 
-    const vercelConfigFile = tempfile('.json');
-    await spinOn(
-      `Writing vercel config...`,
-      `Wrote vercel config to temp file.`,
-      async () => {
-        await writeJsonFile(vercelConfigFile, buildVercelProdConfig({ ...updatedConfig, auth0ClientId: auth0WebClientId }));
-      }
-    );
-
-    await spinOn(
-      `Deploying Vercel app...`,
-      `Done deploying Vercel app. ${domainName
-        ? `The domain (${domainName}) has been set as an alias for the project.
-Please follow directions at https://vercel.com/jmoseley/${projectSlug}/settings/domains to ensure it is properly configured.`
-        : ''
-      }`,
-      async () => {
-        await executeCommand(`yarn deploy-app-vercel`, {
-          VERCEL_CONFIG_FILE: vercelConfigFile,
-          PROJECT_SLUG: projectSlug,
-          HASURA_ENDPOINT: hasuraEndpoint,
-          HASURA_ADMIN_SECRET: adminSecret,
-          DOMAIN_NAME: domainName,
+    // Rewrite the config to save the web client id.
+    if (!updatedConfig.auth0WebClientId || shouldWriteConfig) {
+      updatedConfig.auth0WebClientId = auth0WebClientId;
+      await spinOn(
+        `Writing data to ${configFilePath}...`,
+        `Wrote config to ${configFilePath}. This file contains secrets, and should be kept somewhere safe. However, it should NOT be committed to your repo, put it somewhere else.`,
+        async () => {
+          await writeJsonFile(configFilePath, updatedConfig);
         });
-      }
-    );
+    }
+    
   } catch (error) {
     console.error(`Got an error.`);
 
@@ -286,35 +237,3 @@ Please follow directions at https://vercel.com/jmoseley/${projectSlug}/settings/
 }
 
 main();
-
-function buildVercelProdConfig(config: Config & { auth0ClientId: string }) {
-  const vercelConfig: Record<string, unknown> = {
-    "version": 2,
-    "env": {
-      "NEXT_PUBLIC_HASURA_ENDPOINT": config.hasuraEndpoint,
-      "HASURA_ENDPOINT": config.hasuraEndpoint,
-      "HASURA_ADMIN_SECRET": config.adminSecret,
-      "APP_ROOT": config.appUrl,
-      "NEXT_PUBLIC_APP_ROOT": config.appUrl,
-      "NEXT_PUBLIC_AUTH0_DOMAIN": config.auth0Domain,
-      "NEXT_PUBLIC_AUTH0_CLIENT_ID": config.auth0ClientId,
-    },
-    "build": {
-      "env": {
-        "NEXT_PUBLIC_HASURA_ENDPOINT": config.hasuraEndpoint,
-        "HASURA_ENDPOINT": config.hasuraEndpoint,
-        "HASURA_ADMIN_SECRET": config.adminSecret,
-        "APP_ROOT": config.appUrl,
-        "NEXT_PUBLIC_APP_ROOT": config.appUrl,
-        "NEXT_PUBLIC_AUTH0_DOMAIN": config.auth0Domain,
-        "NEXT_PUBLIC_AUTH0_CLIENT_ID": config.auth0ClientId,
-      }
-    }
-  };
-
-  if (config.domainName) {
-    vercelConfig.alias = [config.domainName];
-  }
-
-  return vercelConfig;
-}

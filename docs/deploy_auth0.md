@@ -1,5 +1,7 @@
 # Deploy Auth0
 
+You should perform these steps for production, and for each developer that wants to run the stack locally. This provides a sandboxed environment for doing development, and keeps that sandbox from mixing with production.
+
 1. Have Hasura and the app deployed (Docs TBD)
 1. Create a new account/tenant.
 1. Delete `Default Application`.

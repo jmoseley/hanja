@@ -11,7 +11,8 @@
     "hasura-local": "./hasura-local-helper.sh",
     "dev-hasura": "./hasura-dev.sh",
     "dev-app": "./app-dev.sh",
-    "dev": "./dev.sh"
+    "dev": "./dev.sh",
+    "configure-dev": "./configure_dev.ts"
   },
   "dependencies": {
     "@supercharge/strings": "^1.12.0",
