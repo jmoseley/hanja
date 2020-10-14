@@ -21,7 +21,7 @@ cd ../hasura
 docker-compose up -d
 
 # Wait for hasura to be up
-wait_for_heroku
+wait_for_hasura
 
 cd ../scripts
 

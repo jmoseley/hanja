@@ -106,22 +106,7 @@ const main = async () => {
       filter: randomStringFilter
     }], existingConfig);
 
-    let shouldWriteConfig = true;
-    if (fs.existsSync(configFilePath)) {
-      const { overwrite } = await inquirer.prompt({
-        type: 'confirm',
-        name: 'overwrite',
-        message: `Overwrite existing config file at '${configFilePath}'`,
-        suffix: '?',
-        prefix: '',
-        default: false,
-      });
-      if (!overwrite) {
-        shouldWriteConfig = false;
-      }
-    }
-
-    const hasuraBaseUrl = `http://localhost:8080`;
+    const hasuraBaseUrl = process.env['HASURA_PUBLIC_URL'] || `http://localhost:8080`;
     const hasuraEndpoint = `${hasuraBaseUrl}/v1/graphql`;
     const auth0Url = `https://${auth0Domain}`;
 
@@ -141,14 +126,12 @@ const main = async () => {
       actionSecret,
     }
 
-    if (shouldWriteConfig) {
-      await spinOn(
-        `Writing data to ${configFilePath}...`,
-        `Wrote config to ${configFilePath}. This file contains secrets, and should be kept somewhere safe. However, it should NOT be committed to your repo, put it somewhere else.`,
-        async () => {
-          await writeJsonFile(configFilePath, updatedConfig);
-        });
-    }
+    await spinOn(
+      `Writing data to ${configFilePath}...`,
+      `Wrote config to ${configFilePath}. This file contains secrets, and should be kept somewhere safe. However, it should NOT be committed to your repo, put it somewhere else.`,
+      async () => {
+        await writeJsonFile(configFilePath, updatedConfig);
+      });
 
     let auth0WebClientId: string | undefined = undefined;
     await spinOn(
@@ -211,7 +194,7 @@ const main = async () => {
     );
 
     // Rewrite the config to save the web client id.
-    if (!updatedConfig.auth0WebClientId || shouldWriteConfig) {
+    if (updatedConfig.auth0WebClientId !== auth0WebClientId) {
       updatedConfig.auth0WebClientId = auth0WebClientId;
       await spinOn(
         `Writing data to ${configFilePath}...`,

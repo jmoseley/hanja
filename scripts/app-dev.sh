@@ -18,7 +18,7 @@ export NEXT_PUBLIC_AUTH0_CLIENT_ID=$(cat ../hanja-config.dev.json | jq -r '.auth
 
 cd ../app
 
-wait_for_heroku
+wait_for_hasura
 
 yarn generate-watch &
 
