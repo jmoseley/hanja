@@ -12,7 +12,7 @@ module.exports = {
       version: 'detect', // Tells eslint-plugin-react to automatically detect the version of React to use
     },
   },
-  plugins: ['markdown'],
+  plugins: ['markdown', 'prettier'],
   extends: [
     'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
     'plugin:@typescript-eslint/recommended', // Uses the recommended rules from @typescript-eslint/eslint-plugin
@@ -20,6 +20,7 @@ module.exports = {
     'plugin:prettier/recommended', // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
   ],
   rules: {
+    'prettier/prettier': 'error',
     'react/prop-types': [0],
     '@typescript-eslint/explicit-function-return-type': 'off',
     'react/display-name': 'off',

@@ -10,8 +10,8 @@ export class ExecError extends Error {
   }
 }
 
-export const executeCommand = (cmd: string, env: SpawnOptions['env']) => {
-  return new Promise<{ stdout: string, stderr: string, code: number, signal: string }>((resolve, reject) => {
+export const executeCommand = (cmd: string, env: SpawnOptions['env'], verbose = false) => {
+  return new Promise<{ stdout: string; stderr: string; code: number; signal: string }>((resolve, reject) => {
     const child = spawn(cmd, {
       cwd: process.cwd(),
       shell: true,
@@ -25,14 +25,20 @@ export const executeCommand = (cmd: string, env: SpawnOptions['env']) => {
     let stderr = Buffer.from('');
     child.stdout.on('data', (m: Buffer) => {
       stdout = Buffer.concat([stdout, m]);
+      if (verbose) {
+        console.log('[stdout]', m.toString());
+      }
     });
     child.stderr.on('data', (m: Buffer) => {
       stderr = Buffer.concat([stderr, m]);
+      if (verbose) {
+        console.log('[stderr]', m.toString());
+      }
     });
 
-    child.once('error', err => {
+    child.once('error', (err) => {
       reject(err);
-    })
+    });
     child.once('exit', (code, signal) => {
       if (code === 0) {
         resolve({
@@ -63,16 +69,27 @@ export async function writeJsonFile<T>(path: string, content: T): Promise<void> 
       } else {
         resolve();
       }
-    })
+    });
   });
 }
 
-export async function spinOn<T>(message: string, doneMessage: string, func: () => Promise<T>): Promise<T> {
+export async function spinOn<T>(
+  message: string,
+  doneMessage: string,
+  func: () => Promise<T>,
+  showSpinner = true,
+): Promise<T> {
   const spinner = new Spinner(message);
   try {
-    spinner.start();
+    if (showSpinner) {
+      spinner.start();
+    } else {
+      console.log(chalk.blue(message));
+    }
     const result = await func();
-    spinner.stop();
+    if (showSpinner) {
+      spinner.stop();
+    }
     console.log(chalk.green(doneMessage));
 
     return result;

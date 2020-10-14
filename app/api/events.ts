@@ -5,26 +5,26 @@ export interface EventPayload<TTable> {
     session_variables: { [key: string]: string };
   } & (
     | {
-      op: 'INSERT' | 'MANUAL';
-      data: {
-        old: null;
-        new: TTable;
-      };
-    }
+        op: 'INSERT' | 'MANUAL';
+        data: {
+          old: null;
+          new: TTable;
+        };
+      }
     | {
-      op: 'UPDATE';
-      data: {
-        old: TTable;
-        new: TTable;
-      };
-    }
+        op: 'UPDATE';
+        data: {
+          old: TTable;
+          new: TTable;
+        };
+      }
     | {
-      op: 'DELETE';
-      data: {
-        old: TTable;
-        new: null;
-      };
-    }
+        op: 'DELETE';
+        data: {
+          old: TTable;
+          new: null;
+        };
+      }
   );
   created_at: string;
   id: string;

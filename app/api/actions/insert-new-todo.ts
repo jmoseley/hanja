@@ -12,12 +12,14 @@ const insertNewTodoHandler = async (req: NowRequest, res: NowResponse) => {
 
   name = emoji.emojify(name);
 
-  const client = getHasuraClient(// TODO: Properly handle session/auth headers
+  const client = getHasuraClient(
+    // TODO: Properly handle session/auth headers
     {
       'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
       'x-hasura-role': 'user',
       'x-hasura-user-id': req.body.session_variables['x-hasura-user-id'],
-    });
+    },
+  );
 
   const result = await client.insertNewTodo({ name });
 

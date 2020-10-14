@@ -9,7 +9,7 @@ import { useAsync } from 'react-async-hook';
 
 export function getHasuraEndpoint() {
   const browserSide = !!process.browser;
-  return browserSide ? process.env.NEXT_PUBLIC_HASURA_ENDPOINT as string : process.env.HASURA_ENDPOINT as string;
+  return browserSide ? (process.env.NEXT_PUBLIC_HASURA_ENDPOINT as string) : (process.env.HASURA_ENDPOINT as string);
 }
 
 const APOLLO_CACHE = new Hermes();
@@ -17,10 +17,9 @@ const APOLLO_CACHE = new Hermes();
 function getApolloClient(accessToken: string | null) {
   const headers = !!accessToken
     ? {
-      Authorization: `Bearer ${accessToken}`,
-    }
+        Authorization: `Bearer ${accessToken}`,
+      }
     : undefined;
-
 
   const browserSide = !!process.browser;
   const hasuraEndpoint = getHasuraEndpoint();
@@ -44,7 +43,7 @@ function getApolloClient(accessToken: string | null) {
         connectionParams: { headers },
         reconnect: true,
       }),
-    )
+    );
 
     splitLink = split(
       ({ query }) => {
@@ -55,7 +54,7 @@ function getApolloClient(accessToken: string | null) {
       },
       wsLink,
       httpLink,
-    )
+    );
   }
 
   return new ApolloClient({
