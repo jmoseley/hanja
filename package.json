@@ -11,7 +11,8 @@
     "hasura-local": "cd scripts && yarn hasura-local",
     "deploy": "cd scripts && yarn deploy",
     "dev": "cd scripts && yarn dev",
-    "configure-dev": "cd scripts && yarn configure-dev"
+    "configure-dev": "cd scripts && yarn configure-dev",
+    "postinstall": "cd scripts && yarn; cd ../app && yarn"
   },
   "devDependencies": {
     "@types/node-emoji": "^1.8.1",
