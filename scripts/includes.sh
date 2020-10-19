@@ -2,7 +2,7 @@ wait_for_hasura() {
   printf "Waiting for hasura to start."
   until $(curl --output /dev/null --silent --fail http://localhost:$HASURA_PORT/healthz); do
     ((count=count+1))
-    if [ $count -gt 5 ]; then
+    if [ $count -gt 15 ]; then
       echo "Failed to start hasura."
       exit 1
     fi
