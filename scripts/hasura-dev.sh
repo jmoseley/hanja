@@ -11,6 +11,8 @@ function cleanup()
 
 trap cleanup EXIT
 
+export HASURA_PORT=${HASURA_PORT:-8081} 
+
 export AUTH0_URL="https://$(cat ../hanja-config.dev.json | jq -r '.auth0Domain')"
 export ADMIN_SECRET=$(cat ../hanja-config.dev.json | jq -r '.adminSecret')
 export ACTION_SECRET=$(cat ../hanja-config.dev.json | jq -r '.actionSecret')
