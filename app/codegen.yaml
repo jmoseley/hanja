@@ -12,9 +12,15 @@ config:
     float8: number
     json: 'Json'
   skipTypename: true
+  enumsAsConst: true
+  nonOptionalTypename: true
+  immutableTypes: true
+  preResolveTypes: true
 generates:
   generated/graphql.tsx:
-    documents: 'graphql/**/*.*.graphql'
+    documents:
+      - './{components,pages}/**/*.{ts,tsx,graphql}'
+      - '!./**/*.generated.{ts,tsx}'
     plugins:
       - add:
           content: '/* eslint-disable */'
@@ -24,18 +30,25 @@ generates:
                 [x: string]: string|number|boolean|Date|Json|JsonArray;
             }
             interface JsonArray extends Array<string|number|boolean|Date|Json|JsonArray> { }
+      - 'fragment-matcher'
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'
     config:
+      apolloReactCommonImportFrom: '@apollo/client'
+      avoidOptionals: true
       reactApolloVersion: 3
       withHooks: true
       withHOC: false
       withComponent: false
       exportFragmentSpreadSubTypes: true
+      strict: true
+      prettify: false
       documentMode: graphQLTag
   api-lib/generated/graphql.ts:
-    documents: 'api-lib/graphql/**/*.*.graphql'
+    documents:
+      - './api/**/*.ts'
+      - '!./**/*.generated.{ts,tsx}'
     plugins:
       - add:
           content: '/* eslint-disable */'
@@ -45,6 +58,7 @@ generates:
                 [x: string]: string|number|boolean|Date|Json|JsonArray;
             }
             interface JsonArray extends Array<string|number|boolean|Date|Json|JsonArray> { }
+      - 'fragment-matcher'
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-graphql-request'

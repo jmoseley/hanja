@@ -1,12 +1,12 @@
 import { NowRequest, NowResponse } from '@vercel/node';
 import * as emoji from 'node-emoji';
+import gql from 'graphql-tag';
+
 import { Mutation_RootInsert_New_TodoArgs } from '../../api-lib/generated/graphql';
 import { getHasuraClient } from '../../api-lib/client';
 
 // Request Handler
 const insertNewTodoHandler = async (req: NowRequest, res: NowResponse) => {
-  // TODO: Validate secret
-  console.log(req.body);
   // get request input
   let { name }: Mutation_RootInsert_New_TodoArgs = req.body.input;
 
@@ -28,5 +28,15 @@ const insertNewTodoHandler = async (req: NowRequest, res: NowResponse) => {
     ...result.insert_todos_one,
   });
 };
+
+insertNewTodoHandler.mutation = gql`
+  mutation insertNewTodo($name: String) {
+    insert_todos_one(object: { name: $name }) {
+      id
+      name
+      completed
+    }
+  }
+`;
 
 export default insertNewTodoHandler;

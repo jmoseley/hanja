@@ -1,7 +1,0 @@
-mutation createTodo($name: String) {
-  insert_new_todo(name: $name) {
-    id
-    name
-    completed
-  }
-}
