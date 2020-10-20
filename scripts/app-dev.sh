@@ -27,4 +27,4 @@ wait_for_hasura
 
 yarn generate-watch &
 
-vercel dev
+vercel dev --confirm
