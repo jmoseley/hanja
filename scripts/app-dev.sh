@@ -3,6 +3,11 @@ set -e
 
 source includes.sh
 
+if vercel whoami 2>&1 | grep "The specified token is not valid" ; then
+  echo "Must log in to vercel."
+  exit 1
+fi
+
 export HASURA_ADMIN_SECRET=$(cat ../hanja-config.dev.json | jq -r '.adminSecret')
 export HASURA_ENDPOINT=$(cat ../hanja-config.dev.json | jq -r '.hasuraEndpoint')
 export APP_ROOT=$(cat ../hanja-config.dev.json | jq -r '.appUrl')
