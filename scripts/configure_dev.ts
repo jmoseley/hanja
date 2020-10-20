@@ -11,7 +11,7 @@ import capcon from 'capture-console';
 
 import { randomStringFilter, writeJsonFile, spinOn, ExecError } from './util';
 
-interface Config {
+export interface Config {
   appUrl: string;
   projectName: string;
   projectSlug: string;
@@ -26,6 +26,7 @@ interface Config {
   adminSecret: string;
   eventSecret: string;
   actionSecret: string;
+  supportUrl: string;
   domainName: string | null;
   graphqlDomainName: string | null;
 }
@@ -77,7 +78,7 @@ const main = async () => {
     const appUrl = `http://localhost:3000`;
 
     // Auth0 requires the support URL to not be 'localhost', so use something else. TODO: Make this configurable.
-    const supportUrl = `https://jmoseley.github.io/hanja`;
+    const supportUrl = existingConfig.supportUrl || `https://jmoseley.github.io/hanja`;
 
     console.log(chalk.blue(`Please enter Auth0 data`));
     const { auth0Domain, auth0CliClientId, auth0CliClientSecret, logoUrl } = await inquirer.prompt(
@@ -150,6 +151,7 @@ const main = async () => {
       adminSecret,
       eventSecret,
       actionSecret,
+      supportUrl,
     };
 
     await spinOn(

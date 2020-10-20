@@ -1,9 +1,10 @@
-/* eslint-disable */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function userSyncRule(user, context, callback) {
   const auth0_id = user.user_id;
   const name = user.nickname;
   const email = user.email;
 
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const request = require('request');
 
   const mutation = `

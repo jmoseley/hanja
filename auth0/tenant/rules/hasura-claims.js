@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function addHasuraClaims(user, context, callback) {
   const namespace = 'https://hasura.io/jwt/claims';
   context.accessToken[namespace] = {

@@ -1,5 +1,10 @@
 {
-  "enabled_locales": ["en"],
+  "enabled_locales": [
+    "en"
+  ],
+  "flags": {
+    "disable_clickjack_protection_headers": false
+  },
   "friendly_name": "Hanja Demo",
   "picture_url": "##LOGO_URL##",
   "support_email": "",

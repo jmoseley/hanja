@@ -12,7 +12,8 @@
     "dev-hasura": "./hasura-dev.sh",
     "dev-app": "./app-dev.sh",
     "dev": "./dev.sh",
-    "configure-dev": "./configure_dev.ts"
+    "configure-dev": "./configure_dev.ts",
+    "dump-auth0": "./dump_auth0.ts"
   },
   "dependencies": {
     "@supercharge/strings": "^1.12.0",
@@ -23,6 +24,7 @@
     "clui": "^0.3.6",
     "inquirer": "^7.3.3",
     "lodash.kebabcase": "^4.1.1",
+    "replace-in-file": "^6.1.0",
     "tempfile": "^3.0.0",
     "yargs": "^16.0.3"
   },

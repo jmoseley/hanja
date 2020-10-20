@@ -11,6 +11,11 @@
   "strategy": "auth0",
   "name": "Username-Password-Authentication",
   "is_domain_connection": false,
-  "realms": ["Username-Password-Authentication"],
-  "enabled_clients": ["hanja-backend", "hanja-web"]
+  "realms": [
+    "Username-Password-Authentication"
+  ],
+  "enabled_clients": [
+    "hanja-backend",
+    "hanja-web"
+  ]
 }

@@ -45,5 +45,5 @@ HASURA_ENDPOINT=$(yarn heroku apps:info | grep "Web URL" | cut -d":" -f2,3 | sed
 cd hasura
 
 echo "Applying migrations"
-hasura migrate apply --endpoint $HASURA_ENDPOINT --admin-secret $ADMIN_SECRET
-hasura metadata apply --endpoint $HASURA_ENDPOINT --admin-secret $ADMIN_SECRET
+hasura migrate apply --endpoint $HASURA_ENDPOINT --admin-secret $ADMIN_SECRET --skip-update-check
+hasura metadata apply --endpoint $HASURA_ENDPOINT --admin-secret $ADMIN_SECRET --skip-update-check

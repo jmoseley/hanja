@@ -12,7 +12,8 @@
     "deploy": "cd scripts && yarn deploy",
     "dev": "cd scripts && yarn dev",
     "configure-dev": "cd scripts && yarn configure-dev",
-    "postinstall": "cd scripts && yarn; cd ../app && yarn"
+    "postinstall": "cd scripts && yarn; cd ../app && yarn",
+    "dump-auth0": "cd scripts && yarn dump-auth0"
   },
   "devDependencies": {
     "@types/node-emoji": "^1.8.1",

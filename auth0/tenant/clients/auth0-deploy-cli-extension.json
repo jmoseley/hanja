@@ -10,6 +10,11 @@
     "lifetime_in_seconds": 36000,
     "secret_encoded": false
   },
-  "grant_types": ["authorization_code", "implicit", "refresh_token", "client_credentials"],
+  "grant_types": [
+    "authorization_code",
+    "implicit",
+    "refresh_token",
+    "client_credentials"
+  ],
   "custom_login_page_on": true
 }
