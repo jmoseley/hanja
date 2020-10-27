@@ -21,7 +21,22 @@ const insertNewTodoHandler = async (req: NowRequest, res: NowResponse) => {
     },
   );
 
-  const result = await client.insertNewTodo({ name });
+  if (!req.body.session_variables['x-hasura-user-id']) {
+    return res.status(500).send({
+      error: 'No user id',
+      'error-code': 'no-user-id',
+    });
+  }
+
+  const fetchUserResult = await client.fetchUser({ auth0Id: req.body.session_variables['x-hasura-user-id'] });
+  if (!fetchUserResult.users[0]) {
+    return res.status(500).send({
+      error: 'User not found',
+      'error-code': 'user-not-found',
+    });
+  }
+
+  const result = await client.insertNewTodo({ name, userId: fetchUserResult.users[0].id });
 
   // success
   return res.json({
@@ -30,11 +45,21 @@ const insertNewTodoHandler = async (req: NowRequest, res: NowResponse) => {
 };
 
 insertNewTodoHandler.mutation = gql`
-  mutation insertNewTodo($name: String) {
-    insert_todos_one(object: { name: $name }) {
+  mutation insertNewTodo($name: String!, $userId: uuid!) {
+    insert_todos_one(object: { name: $name, user_id: $userId }) {
       id
       name
       completed
+    }
+  }
+`;
+
+insertNewTodoHandler.query = gql`
+  query fetchUser($auth0Id: String!) {
+    users(where: { auth0_id: { _eq: $auth0Id } }) {
+      id
+      email
+      name
     }
   }
 `;

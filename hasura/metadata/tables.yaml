@@ -15,6 +15,7 @@
       columns:
       - completed
       - name
+      - user_id
       backend_only: false
   select_permissions:
   - role: user
@@ -25,6 +26,7 @@
       - id
       - name
       - updated_at
+      - user_id
       filter:
         user:
           auth0_id:
@@ -79,6 +81,9 @@
   - role: user
     permission:
       columns:
+      - auth0_id
+      - email
+      - id
       - name
       filter:
         auth0_id:
