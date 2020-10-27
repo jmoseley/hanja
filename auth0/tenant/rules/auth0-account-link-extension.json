@@ -1,0 +1,7 @@
+{
+  "enabled": true,
+  "script": "./auth0-account-link-extension.js",
+  "name": "auth0-account-link-extension",
+  "order": 5,
+  "stage": "login_success"
+}

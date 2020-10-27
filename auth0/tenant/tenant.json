@@ -5,7 +5,7 @@
   "flags": {
     "disable_clickjack_protection_headers": false
   },
-  "friendly_name": "Hanja Demo",
+  "friendly_name": "##PROJECT_NAME## Demo",
   "picture_url": "##LOGO_URL##",
   "support_email": "",
   "support_url": "##SUPPORT_URL##"

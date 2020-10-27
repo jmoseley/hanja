@@ -11,6 +11,7 @@
   "name": "google-oauth2",
   "is_domain_connection": false,
   "enabled_clients": [
+    "auth0-account-link",
     "hanja-web"
   ]
 }

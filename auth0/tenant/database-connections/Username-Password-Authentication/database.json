@@ -15,7 +15,8 @@
     "Username-Password-Authentication"
   ],
   "enabled_clients": [
-    "hanja-backend",
-    "hanja-web"
+    "auth0-account-link",
+    "hanja-web",
+    "hanja-backend"
   ]
 }
