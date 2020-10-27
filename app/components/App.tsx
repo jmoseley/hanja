@@ -10,6 +10,7 @@ const App: FunctionComponent = () => {
 
   return (
     <div>
+      <img src="/logo.png" />
       <h1>Hanja Todo App 📝</h1>
       {error && <div>Login Error: {error.message}</div>}
       {!isAuthenticated && <LoginButton />}
