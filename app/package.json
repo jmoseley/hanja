@@ -52,7 +52,7 @@
     "enzyme-adapter-react-16": "^1.15.3",
     "enzyme-to-json": "^3.5.0",
     "jest": "^26.4.0",
-    "jsdom": "^16.4.0",
+    "jsdom": "^16.5.0",
     "jsdom-global": "^3.0.2",
     "ts-jest": "^26.2.0",
     "typescript": "^3.9.7"
